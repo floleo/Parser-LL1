@@ -28,7 +28,7 @@ public class AwesomeLLCalc implements LLCalc {
             set.add(t);
             first.put(t, set);
         }
-        for (NonTerm t : grammar.getNonterminals()) {
+        for (NonTerm t : grammar.getNonTerminals()) {
             first.put(t, new HashSet<>());
         }
 
@@ -63,7 +63,7 @@ public class AwesomeLLCalc implements LLCalc {
     public void calcFollow() {
         follow = new HashMap<>();
 
-        for (NonTerm t : grammar.getNonterminals()) {
+        for (NonTerm t : grammar.getNonTerminals()) {
             follow.put(t, new HashSet<>());
         }
 
@@ -132,7 +132,7 @@ public class AwesomeLLCalc implements LLCalc {
 
     @Override
     public boolean isLL1() {
-        for (NonTerm nt : grammar.getNonterminals()) {
+        /*for (NonTerm nt : grammar.getNonTerminals()) {
             for (Rule r : grammar.getRules(nt)) {
                 for (Rule r2 : grammar.getRules(nt)) {
                     if (r != r2) {
@@ -144,7 +144,7 @@ public class AwesomeLLCalc implements LLCalc {
                     }
                 }
             }
-        }
+        }*/
         return true;
     }
 }

@@ -10,6 +10,7 @@ public class Grammar {
 	private final List<NonTerm> lhss;
 	private final List<NonTerm> nonTerminals;
 	private final List<Term> terminals;
+	//private final Map<NonTerm, List<Rule>> ruleMap;
 	
 	
 	public Grammar(NonTerm start, List<Rule> rules, List<NonTerm> lhss, List<NonTerm> nonTerminals, List<Term> terminals){
@@ -69,6 +70,11 @@ public class Grammar {
 	}
 
 	*/
+	
+	/** Returns all rules corresponding to a given LHS symbol. */
+	/*public List<Rule> getRules(NonTerm lhs) {
+		return ruleMap.get(lhs);
+	}*/
 	
 	/** Returns all rules of this grammar. */
 	public List<Rule> getRules() {

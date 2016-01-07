@@ -31,19 +31,19 @@ public class Main {
 	                    	System.out.println("INSERIMENTO GRAMMATICA DA TASTIERA:");
 	                    	
 	                    	HashMap<NonTerm, ArrayList<Rule>> ruleMap = null;
-	                    	LinkedList<Term> terminals = null;
+	                    	LinkedList<Term> terminals = new LinkedList<>();
 	                    	Term t;
 	                    	int i=0;
 	                    	int term = 0;
 	                    	System.out.println("Inserire il numero di terminali della grammatica:");
 	                    	term = Integer.parseInt(br.readLine());
 	                    	for(i=0; i<term;i++){
-	                    	System.out.println("Inserisci il terminale:");
-	                    	t = new Term(br.readLine());
-	                    	terminals.add(t);
+	                    		System.out.println("Inserisci il terminale:");
+	                    		t = new Term(br.readLine());
+	                    		terminals.add(t);
 	                    	}
 	                    	
-	                    	LinkedList<NonTerm> nonTerminals = null;
+	                    	LinkedList<NonTerm> nonTerminals = new LinkedList<>();
 	                    	NonTerm nt;
 	                    	int nonTerm = 0;
 	                    	System.out.println("Inserire il numero di non terminali della grammatica:");
@@ -57,13 +57,13 @@ public class Main {
 	                    	System.out.println("Inserire lo start symbol:");
 	                    	NonTerm s = new NonTerm(br.readLine());
 
-	                    	ArrayList<Rule> rules = null;
-	                    	List<NonTerm> lhss = null;
+	                    	ArrayList<Rule> rules = new ArrayList<Rule>();
+	                    	List<NonTerm> lhss = new LinkedList<NonTerm>();
 	                    	Rule production;
 	                    	int rule = 0;
 	                    	int right = 0;
 	                    	NonTerm lhs;
-	                    	List<Symbol> rhs = null;
+	                    	List<Symbol> rhs = new LinkedList<Symbol>();
 	                    	System.out.println("Inserire il numero di produzioni della grammatica:");
 	                    	rule = Integer.parseInt(br.readLine());
 	                    	for(i=0; i<rule;i++){
