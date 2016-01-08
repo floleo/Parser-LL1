@@ -23,7 +23,7 @@ public class Grammar {
 	
 	public Grammar(NonTerm start) {
 		this.start = start;
-		this.rules = new ArrayList<>();
+		this.rules = new LinkedList<>();
 		this.lhss = new LinkedList<NonTerm>();
 		this.nonTerminals = new LinkedList<>();
 		this.terminals = new LinkedList<>();

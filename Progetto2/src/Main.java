@@ -1,12 +1,13 @@
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Main {
@@ -57,13 +58,13 @@ public class Main {
 	                    	System.out.println("Inserire lo start symbol:");
 	                    	NonTerm s = new NonTerm(br.readLine());
 
-	                    	ArrayList<Rule> rules = new ArrayList<Rule>();
+	                    	LinkedList<Rule> rules = new LinkedList<Rule>();
 	                    	List<NonTerm> lhss = new LinkedList<NonTerm>();
 	                    	Rule production;
 	                    	int rule = 0;
 	                    	int right = 0;
 	                    	NonTerm lhs;
-	                    	List<Symbol> rhs = new LinkedList<Symbol>();
+	                    	List<Symbol> rhs = null;
 	                    	System.out.println("Inserire il numero di produzioni della grammatica:");
 	                    	rule = Integer.parseInt(br.readLine());
 	                    	String noterm;
@@ -81,12 +82,17 @@ public class Main {
 		                    			lhss.add(lhs);
 		                    			b = false;
 		                    		}
+		                    		if(s.equals(lhs)){
+		                    			lhss.add(lhs);
+		                    			b = false;
+		                    		}
 		                    	}
 	                    		if(b) System.out.println("Non terminale non valido. Riprova");
 		                    	}while(b);
 
 		                    	System.out.println("Inserisci il numero di simboli presenti nella parte destra:");
 		                    	right = Integer.parseInt(br.readLine());
+	                    		rhs = new LinkedList<Symbol>();
 		                    	for(l=0; l<right;l++){
 		                    		String symbol;
 		                    		NonTerm ntsym;
@@ -112,6 +118,7 @@ public class Main {
 	                    	}
 	                    	
 	                    	Grammar g = new Grammar(s,rules,lhss,nonTerminals,terminals);
+	                    	salvaGrammatica(g);
 	                    	System.out.println("Grammatica inserita con successo!");
 	                    	
 	                        break;
@@ -130,4 +137,22 @@ public class Main {
 	            br.close();
 	        }
 	    }
+	
+public static void salvaGrammatica(Grammar g){
+	PrintWriter pr;
+    try {
+        pr = new PrintWriter (new FileWriter("Grammatica.txt"), true);
+            pr.println("Terminali: " + g.getTerminals());
+            pr.println("Non terminali: " + g.getNonTerminals());
+            pr.println("Start Symbol: " + g.getStart());
+            List<Rule> lis = g.getRules();
+            ListIterator<Rule> prod = lis.listIterator();
+            while(prod.hasNext()){
+            pr.println(prod.next());
+            }
+    } catch (IOException ex) {
+        Logger.getLogger(Grammar.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }
+	
 	}
