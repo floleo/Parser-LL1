@@ -41,21 +41,11 @@ public class GestoreFile {
 	/*public Grammatica leggiFile() throws FileNotFoundException{
 		Scanner s=new Scanner(new FileReader(f));
 		NonTerminale start;
-		List<Regola> regola=new ArrayList<>();
+		List<Regola> regola=new LinkedList<>();
 		List<NonTerminale> lhss=new LinkedList<NonTerminale>();
 		List<NonTerminale> nonTerminals= new LinkedList<>();
 		List<Terminale> terminals=new LinkedList<>();
-		while(s.hasNext(Pattern.compile("[a-z0-9]"))){
-			String name=s.next();
-			Terminale t=new Terminale(name);
-			terminals.add(t);
-		}
-		while(s.hasNext(Pattern.compile("[A-Z]"))){
-			String name=s.next();
-			NonTerminale nt=new NonTerminale(name);
-			nonTerminals.add(nt);
-			start=nonTerminals.get(0);
-		}
+		
 		
 	}*/
 }
