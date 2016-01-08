@@ -66,14 +66,14 @@ public class GestoreFile {
         }
         
         return g;
-    }
+    }*/
 	
-	/*
+	
 	 public Grammatica leggiFile(){
 		String input;
 		Grammatica g;
         NonTerminale start= null;
-		List<Regola> regola=new LinkedList<>();
+		List<Produzione> regola=new LinkedList<>();
 		List<NonTerminale> lhss=new LinkedList<NonTerminale>();
 		List<NonTerminale> nonTerminals= new LinkedList<>();
 		List<Terminale> terminals=new LinkedList<>();
@@ -108,7 +108,7 @@ public class GestoreFile {
             		}
             		br.read();
             		
-            		Regola rule = null;
+            		Produzione rule = null;
             		while ((input=Integer.toString(br.read()))!="]"){
             			if(input!=","&&input!="["){
             				NonTerminale ntsym = new NonTerminale(input);
@@ -120,7 +120,7 @@ public class GestoreFile {
                 			}
             			}
             		}
-            		rule = new Regola(lhs,rhs);
+            		rule = new Produzione(lhs,rhs);
             		regola.add(rule);
             	}
             }
@@ -133,60 +133,5 @@ public class GestoreFile {
 		g = new Grammatica(start, regola, lhss, nonTerminals, terminals);
 		return g;
     }
-	 */
-	/*
-    }*/
-	
-	public Grammatica leggiFile() throws FileNotFoundException{
-		Scanner s=new Scanner(new FileReader(f));
-		Pattern pattern = Pattern.compile("\\[\\,");
-		//s.useDelimiter("\\[\\,");
-		Grammatica g;
-		String str;
-		NonTerminale start= null;
-		List<Produzione> regola=new LinkedList<>();
-		List<NonTerminale> lhss=new LinkedList<NonTerminale>();
-		List<NonTerminale> nonTerminals= new LinkedList<>();
-		List<Terminale> terminals=new LinkedList<>();
-		while (s.hasNext()){
-			do{
-				str=s.next();
-				Terminale t = new Terminale(str);
-				terminals.add(t);
-			}while(s.findInLine(pattern)=="]");
-			while((str = s.next())!="]"){
-				NonTerminale nt = new NonTerminale(str);
-				nonTerminals.add(nt);
-			}
-			start = new NonTerminale(s.nextLine());
-            
-            Produzione reg;
-            while((str = s.next())!="]"){
-				NonTerminale nt = new NonTerminale(str);
-				LinkedList<Simbolo> rhs = new LinkedList<>();
-				lhss.add(nt);
-				s.next();
-				s.next();
-				Terminale t2;
-				NonTerminale nt2;
-				while((str = s.next())!="]"){
-					Pattern patt = Pattern.compile("[a-z]");
-					Matcher matcher = patt.matcher(str);
-					if(matcher.matches()){
-						t2 = new Terminale(str);
-						rhs.add(t2);
-					}else{
-						nt2 = new NonTerminale(str);
-						rhs.add(nt2);
-					}
-				}
-				reg = new Produzione(nt,rhs);
-				regola.add(reg);
-            }
-		}
-		s.close();
-        g = new Grammatica(start, regola, lhss, nonTerminals, terminals);
-		return g;
-	}
 	
 }
