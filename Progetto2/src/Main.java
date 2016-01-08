@@ -26,6 +26,8 @@ public class Main {
 	                    case 1:
 	                    	System.out.println("Inserisci il nome del file da cui leggere la grammatica: ");
 	                    	gf=new GestoreFile(br.readLine());
+	                    	Grammatica gr = gf.leggiFile();
+	                    	gf.stampaFile(gr);
 	                        break;
 	                    case 2:
 	                    	System.out.println("INSERIMENTO GRAMMATICA DA TASTIERA");
@@ -42,9 +44,9 @@ public class Main {
 	                    			System.out.println("Inserisci il terminale:");
 	                    			s=br.readLine();
 	                    			t = new Terminale(s);
-	                    			if(!t.checkTerminale(s)) 
+	                    			if(!t.checkTerminale()) 
 	                    				System.out.println("Il terminale può essere solo un numero o un carattere minuscolo");
-	                    		}while(!t.checkTerminale(s));
+	                    		}while(!t.checkTerminale());
 	                    		terminals.add(t);
 	                    	}
 	                    	
@@ -59,9 +61,9 @@ public class Main {
 	                    			System.out.println("Inserisci il non terminale:");
 	                    			s=br.readLine();
 	                    			nt = new NonTerminale(s);
-	                    			if(!nt.checkNonTerminale(s)) 
+	                    			if(!nt.checkNonTerminale()) 
 	                    				System.out.println("Il non terminale può essere solo un carattere maiuscolo");
-	                    		}while(!nt.checkNonTerminale(s));
+	                    		}while(!nt.checkNonTerminale());
 	                    		nonTerminals.add(nt);
 		                    }
 	                    	
@@ -96,18 +98,19 @@ public class Main {
 		                    			lhss.add(lhs);
 		                    			b = false;
 		                    		}
-		                    		if(s.equals(lhs)){
-		                    			lhss.add(lhs);
-		                    			b = false;
-		                    		}
 		                    	}
 	                    		if(b) System.out.println("Non terminale non valido. Riprova");
 		                    	}while(b);
 
-		                    	System.out.println("Inserisci il numero di simboli presenti nella parte destra:");
+		                    	System.out.println("Inserisci il numero di simboli presenti nella parte destra(0 se è epsilon):");
 		                    	right = Integer.parseInt(br.readLine());
-	                    		rhs = new LinkedList<Simbolo>();
-		                    	for(l=0; l<right;l++){
+		                    	rhs = new LinkedList<Simbolo>();
+		                    	if(right==0){
+		                    		Terminale eps;
+		                    		eps = Terminale.EPSILON;
+		                    		rhs.add(eps);
+		                    	} else{
+	                    		for(l=0; l<right;l++){
 		                    		String symbol;
 		                    		NonTerminale ntsym;
 		                    		Terminale tsym;
@@ -124,7 +127,7 @@ public class Main {
 		                    			} else System.out.println("Simbolo non esistente. Inserire un simbolo valido");
 		                    		}while(!nonTerminals.contains(ntsym)&&!terminals.contains(tsym));
 		                    	}
-		                    	
+		                    	}
 		                    	production = new Regola(lhs,rhs);
 		                    	lhss.add(lhs);
 	                    		regola.add(production);
@@ -134,12 +137,12 @@ public class Main {
 	                    	Grammatica g = new Grammatica(s,regola,lhss,nonTerminals,terminals);
 
 	                    	System.out.println("Grammatica inserita con successo!");
-	                    	System.out.println("Inserire il nome del file su cui salvare la grammatica: ");
+	                    	System.out.println("Inserire il nome del file su cui salvare la grammatica(inclusa l'estensione, es. prova.txt): ");
 	                    	gf=new GestoreFile(br.readLine());
 	                    	//gf.scriviFile(terminals, nonTerminals, regola);
 	                    	gf.scriviFile(g);
 	                    	System.out.println("Inserimento su file completato con successo!");
-	                    	
+	                    	gf.stampaFile(g);
 	                        break;
 	                    case 0:
 	                        System.out.println("Programma terminato");

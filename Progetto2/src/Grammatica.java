@@ -21,8 +21,8 @@ public class Grammatica {
 		this.terminals = terminals;
 	}
 	
-	public Grammatica(NonTerminale start) {
-		this.start = start;
+	public Grammatica() {
+		this.start = new NonTerminale("start");
 		this.regola = new LinkedList<>();
 		this.lhss = new LinkedList<NonTerminale>();
 		this.nonTerminals = new LinkedList<>();

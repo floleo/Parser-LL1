@@ -9,10 +9,10 @@ public class Terminale implements Simbolo {
 		this.name = name;
 	}
 	
-	public boolean checkTerminale (String name)
+	public boolean checkTerminale ()
     {         
         Pattern pattern = Pattern.compile(exp_name);
-        Matcher matcher = pattern.matcher(name);
+        Matcher matcher = pattern.matcher(this.name);
 
         if (matcher.matches())
            return true;

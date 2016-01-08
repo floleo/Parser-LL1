@@ -10,10 +10,10 @@ public class NonTerminale implements Simbolo {
 		this.name = name;
 	}
 
-	public boolean checkNonTerminale (String name)
+	public boolean checkNonTerminale ()
     {         
         Pattern pattern = Pattern.compile(exp_name);
-        Matcher matcher = pattern.matcher(name);
+        Matcher matcher = pattern.matcher(this.name);
 
         if (matcher.matches())
            return true;
