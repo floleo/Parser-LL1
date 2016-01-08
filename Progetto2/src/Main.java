@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 
 public class Main {
@@ -30,10 +31,9 @@ public class Main {
 	                    case 2:
 	                    	System.out.println("INSERIMENTO GRAMMATICA DA TASTIERA:");
 	                    	
-	                    	HashMap<NonTerm, ArrayList<Rule>> ruleMap = null;
 	                    	LinkedList<Term> terminals = new LinkedList<>();
 	                    	Term t;
-	                    	int i=0;
+	                    	int i=0, j=0, k=0, l=0;
 	                    	int term = 0;
 	                    	System.out.println("Inserire il numero di terminali della grammatica:");
 	                    	term = Integer.parseInt(br.readLine());
@@ -48,7 +48,7 @@ public class Main {
 	                    	int nonTerm = 0;
 	                    	System.out.println("Inserire il numero di non terminali della grammatica:");
 	                    	nonTerm = Integer.parseInt(br.readLine());
-	                    	for(i=0; i<nonTerm;i++){
+	                    	for(j=0; j<nonTerm;j++){
 		                    	System.out.println("Inserisci il non terminale:");
 		                    	nt = new NonTerm(br.readLine());
 		                    	nonTerminals.add(nt);
@@ -66,30 +66,54 @@ public class Main {
 	                    	List<Symbol> rhs = new LinkedList<Symbol>();
 	                    	System.out.println("Inserire il numero di produzioni della grammatica:");
 	                    	rule = Integer.parseInt(br.readLine());
-	                    	for(i=0; i<rule;i++){
-		                    	System.out.println("Inserisci il non terminale nella parte sinistra:");
-		                    	lhs = nonTerminals.get(nonTerminals.indexOf(br.readLine()));
+	                    	String noterm;
+	                    	
+	                    	for(k=0; k<rule;k++){
+		                    	boolean b = true;
+		                    	ListIterator<NonTerm> iter;
+		                    	do{
+	                    		System.out.println("Inserisci il non terminale nella parte sinistra:");
+		                    	noterm = br.readLine();
+		                    	lhs = new NonTerm(noterm);
+		                    	iter = nonTerminals.listIterator();
+		                    	while(iter.hasNext()){
+		                    		if(iter.next().equals(lhs)){
+		                    			lhss.add(lhs);
+		                    			b = false;
+		                    		}
+		                    	}
+	                    		if(b) System.out.println("Non terminale non valido. Riprova");
+		                    	}while(b);
+
 		                    	System.out.println("Inserisci il numero di simboli presenti nella parte destra:");
 		                    	right = Integer.parseInt(br.readLine());
-		                    	for(i=0; i<right;i++){
+		                    	for(l=0; l<right;l++){
 		                    		String symbol;
+		                    		NonTerm ntsym;
+		                    		Term tsym;
+		                    		
 		                    		do{
 		                    			System.out.println("Inserisci il simbolo:");
 		                    			symbol = br.readLine();
-		                    			if(nonTerminals.contains(symbol)){
-		                    				rhs.add(nonTerminals.get(nonTerminals.indexOf(symbol)));
-		                    			} else if(terminals.contains(symbol)){
-		                    				rhs.add(terminals.get(terminals.indexOf(symbol)));
+		                    			ntsym = new NonTerm(symbol);
+		                    			tsym = new Term(symbol);
+		                    			if(nonTerminals.contains(ntsym)){
+		                    				rhs.add(ntsym);
+		                    			} else if(terminals.contains(tsym)){
+		                    				rhs.add(tsym);
 		                    			} else System.out.println("Simbolo non esistente. Inserire un simbolo valido");
-		                    		}while(!nonTerminals.contains(symbol)&&!terminals.contains(symbol));
+		                    		}while(!nonTerminals.contains(ntsym)&&!terminals.contains(tsym));
 		                    	}
+		                    	
 		                    	production = new Rule(lhs,rhs);
 		                    	lhss.add(lhs);
 	                    		rules.add(production);
+	                    		System.out.println("Produzione aggiunta con successo!");
 	                    	}
 	                    	
 	                    	Grammar g = new Grammar(s,rules,lhss,nonTerminals,terminals);
-	                    		
+	                    	System.out.println("Grammatica inserita con successo!");
+	                    	
 	                        break;
 	                    case 0:
 	                        System.out.println("Programma terminato");
