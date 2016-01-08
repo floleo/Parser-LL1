@@ -1,15 +1,29 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Terminale implements Simbolo {
 
+	private final String name;
+	private static String exp_name = "[a-z0-9]";
 	public Terminale(String name) {
-		this.name = name.toLowerCase();
+		this.name = name;
 	}
+	
+	public boolean checkTerminale (String name)
+    {         
+        Pattern pattern = Pattern.compile(exp_name);
+        Matcher matcher = pattern.matcher(name);
+
+        if (matcher.matches())
+           return true;
+        else
+           return false;
+    } 
 
 	@Override
 	public String getName() {
 		return name;
 	}
-
-	private final String name;
 
 	@Override
 	public String toString() {

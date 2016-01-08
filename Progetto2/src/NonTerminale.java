@@ -1,15 +1,31 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class NonTerminale implements Simbolo {
-	/** Constructs a non-terminal with a given name. */
+	
+	private final String name;
+	private static String exp_name="[A-Z]";
+	
 	public NonTerminale(String name) {
 		this.name = name.toUpperCase();
 	}
 
+	public boolean checkNonTerminale (String name)
+    {         
+        Pattern pattern = Pattern.compile(exp_name);
+        Matcher matcher = pattern.matcher(name);
+
+        if (matcher.matches())
+           return true;
+        else
+           return false;
+    } 
+	
 	@Override
 	public String getName() {
 		return name;
 	}
 
-	private final String name;
 
 	@Override
 	public String toString() {

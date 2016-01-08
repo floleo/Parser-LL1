@@ -39,8 +39,14 @@ public class Main {
 	                    	System.out.println("Inserire il numero di terminali della grammatica:");
 	                    	term = Integer.parseInt(br.readLine());
 	                    	for(i=0; i<term;i++){
-	                    		System.out.println("Inserisci il terminale:");
-	                    		t = new Terminale(br.readLine());
+	                    		String s;
+	                    		do{
+	                    			System.out.println("Inserisci il terminale:");
+	                    			s=br.readLine();
+	                    			t = new Terminale(s);
+	                    			if(!t.checkTerminale(s)) 
+	                    				System.out.println("Il terminale può essere solo un numero o un carattere minuscolo");
+	                    		}while(!t.checkTerminale(s));
 	                    		terminals.add(t);
 	                    	}
 	                    	
@@ -50,9 +56,15 @@ public class Main {
 	                    	System.out.println("Inserire il numero di non terminali della grammatica:");
 	                    	nonTerm = Integer.parseInt(br.readLine());
 	                    	for(j=0; j<nonTerm;j++){
-		                    	System.out.println("Inserisci il non terminale: ");
-		                    	nt = new NonTerminale(br.readLine());
-		                    	nonTerminals.add(nt);
+	                    		String s;
+	                    		do{
+	                    			System.out.println("Inserisci il non terminale:");
+	                    			s=br.readLine();
+	                    			nt = new NonTerminale(s);
+	                    			if(!nt.checkNonTerminale(s)) 
+	                    				System.out.println("Il non terminale può essere solo un carattere maiuscolo");
+	                    		}while(!nt.checkNonTerminale(s));
+	                    		nonTerminals.add(nt);
 		                    }
 	                    	
 	                    	System.out.println("Inserire lo start symbol: ");
