@@ -67,6 +67,73 @@ public class GestoreFile {
         
         return g;
     }
+	
+	/*
+	 public Grammatica leggiFile(){
+		String input;
+		Grammatica g;
+        NonTerminale start= null;
+		List<Regola> regola=new LinkedList<>();
+		List<NonTerminale> lhss=new LinkedList<NonTerminale>();
+		List<NonTerminale> nonTerminals= new LinkedList<>();
+		List<Terminale> terminals=new LinkedList<>();
+		try {
+            BufferedReader br= new BufferedReader(new FileReader(f));
+            
+            while ((input=Integer.toString(br.read()))!="]"){
+            	if(input!=","&&input!="["){
+            		Terminale t = new Terminale(input);
+            		terminals.add(t);
+            	}
+            }
+            while ((input=Integer.toString(br.read()))!="]"){
+            	if(input!=","&&input!="["){
+            		NonTerminale nt = new NonTerminale(input);
+            		nonTerminals.add(nt);
+            	}
+            }
+            input=Integer.toString(br.read());
+            NonTerminale st = new NonTerminale(input);
+            nonTerminals.add(st);
+            
+            LinkedList<Simbolo> rhs = new LinkedList<Simbolo>();
+            NonTerminale lhs = null;
+            while ((input=Integer.toString(br.read()))!=null){
+            	while ((input=Integer.toString(br.read()))!="]"){
+            		while ((input=Integer.toString(br.read()))!="-"){
+                            	if(input!=","&&input!="["){
+                            		lhs = new NonTerminale(input);
+                            		lhss.add(lhs);
+                            	}
+            		}
+            		br.read();
+            		
+            		Regola rule = null;
+            		while ((input=Integer.toString(br.read()))!="]"){
+            			if(input!=","&&input!="["){
+            				NonTerminale ntsym = new NonTerminale(input);
+                			Terminale tsym = new Terminale(input);
+                			if(ntsym.checkNonTerminale()){
+                				rhs.add(ntsym);
+                			} else if(tsym.checkTerminale()){
+                				rhs.add(tsym);
+                			}
+            			}
+            		}
+            		rule = new Regola(lhs,rhs);
+            		regola.add(rule);
+            	}
+            }
+    		br.close();
+            
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+		g = new Grammatica(start, regola, lhss, nonTerminals, terminals);
+		return g;
+    }
+	 */
 	/*
 	public Grammatica leggiFile() throws FileNotFoundException{
 		Scanner s=new Scanner(new FileReader(f));
