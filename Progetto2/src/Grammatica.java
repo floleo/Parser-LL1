@@ -23,7 +23,7 @@ public class Grammatica {
 	
 	public Grammatica(NonTerminale start) {
 		this.start = start;
-		this.regola = new ArrayList<>();
+		this.regola = new LinkedList<>();
 		this.lhss = new LinkedList<NonTerminale>();
 		this.nonTerminals = new LinkedList<>();
 		this.terminals = new LinkedList<>();

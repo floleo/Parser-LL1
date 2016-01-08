@@ -22,22 +22,17 @@ public class GestoreFile {
 	}
 	
 	public void scriviFile(Grammatica g){
-		PrintWriter pr;
+		PrintWriter w;
 		try {
-			/*w = new PrintWriter(new FileWriter(f));
-	        for(Terminale t: terminals) w.println(t.toString());
-	        for(NonTerminale nt: nonTerminals) w.println(nt.toString());
-	        for(Regola r: regola) w.println(r.toString());
-	        w.close();*/
-			pr = new PrintWriter (new FileWriter(f), true);
-			pr.println("Terminali: " + g.getTerminals());
-			            pr.println("Non terminali: " + g.getNonTerminals());
-			             pr.println("Start Symbol: " + g.getStart());
-			             List<Regola> lis = g.getRules();
-			             ListIterator<Regola> prod = lis.listIterator();
-			             while(prod.hasNext()){
-			             pr.println(prod.next());
-			            }
+			w = new PrintWriter (new FileWriter(f), true);
+			w.println("Terminali: " + g.getTerminals());
+			w.println("Non terminali: " + g.getNonTerminals());
+			w.println("Start Symbol: " + g.getStart());
+			List<Regola> lis = g.getRules();
+			ListIterator<Regola> prod = lis.listIterator();
+			while(prod.hasNext()){
+			    w.println(prod.next());
+			 }
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
