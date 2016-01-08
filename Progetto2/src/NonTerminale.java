@@ -1,8 +1,13 @@
+import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NonTerminale implements Simbolo {
+public class NonTerminale implements Simbolo, Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final String name;
 	private static String exp_name="[A-Z]";
 	

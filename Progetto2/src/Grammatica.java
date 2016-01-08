@@ -1,10 +1,15 @@
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Collection of rules with a start symbol.
  */
-public class Grammatica {
+public class Grammatica implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final NonTerminale start;
 	private final List<Produzione> regola;
 	private final List<NonTerminale> lhss;

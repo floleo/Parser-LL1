@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -5,8 +6,12 @@ import java.util.List;
  * A rule consists of a left hand side (LHS, a {@link NonTerminale}) 
  * and a right hand side (RHS, a string of {@link Simbolo}s).
  */
-public class Produzione {
+public class Produzione implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final NonTerminale lhs;
 	private final List<Simbolo> rhs;
 
