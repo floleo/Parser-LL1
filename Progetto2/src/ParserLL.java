@@ -10,7 +10,7 @@ public class ParserLL implements ParserLLInterface {
         this.grammatica = grammatica;
         calcFirst();
         calcFollow();
-        calcFirstp();
+        calcPredict();
     }
 
     public void calcFirst() {
@@ -98,7 +98,7 @@ public class ParserLL implements ParserLLInterface {
         }
     }
 
-    public void calcFirstp() {
+    public void calcPredict() {
         firstp = new HashMap<>();
         for (Regola r : grammatica.getRules()) {
             Set<Terminale> firstSymbols = new HashSet<>(first.get(r.getRHS().get(0)));
@@ -126,7 +126,7 @@ public class ParserLL implements ParserLLInterface {
     }
 
     @Override
-    public Map<Regola, Set<Terminale>> getFirstp() {
+    public Map<Regola, Set<Terminale>> getPredict() {
         return firstp;
     }
 
