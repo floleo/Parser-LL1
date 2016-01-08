@@ -7,7 +7,7 @@ public class NonTerminale implements Simbolo {
 	private static String exp_name="[A-Z]";
 	
 	public NonTerminale(String name) {
-		this.name = name.toUpperCase();
+		this.name = name;
 	}
 
 	public boolean checkNonTerminale (String name)
