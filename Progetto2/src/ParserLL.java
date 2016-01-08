@@ -1,13 +1,13 @@
 import java.util.*;
 
-public class AwesomeLLCalc implements LLCalc {
-    private Grammar grammar;
-    private Map<Symbol, Set<Term>> first;
-    private Map<NonTerm,Set<Term>> follow;
-    private Map<Rule, Set<Term>> firstp;
+public class ParserLL implements ParserLLInterface {
+    private Grammatica grammatica;
+    private Map<Simbolo, Set<Terminale>> first;
+    private Map<NonTerminale,Set<Terminale>> follow;
+    private Map<Regola, Set<Terminale>> firstp;
 
-    public AwesomeLLCalc(Grammar grammar) {
-        this.grammar = grammar;
+    public ParserLL(Grammatica grammatica) {
+        this.grammatica = grammatica;
         calcFirst();
         calcFollow();
         calcFirstp();
@@ -15,20 +15,20 @@ public class AwesomeLLCalc implements LLCalc {
 
     public void calcFirst() {
         first = new HashMap<>();
-        Set<Term> eofSet = new HashSet<>();
-        eofSet.add(Symbol.EOF);
-        first.put(Symbol.EOF, eofSet);
+        Set<Terminale> eofSet = new HashSet<>();
+        eofSet.add(Simbolo.EOF);
+        first.put(Simbolo.EOF, eofSet);
 
-        Set<Term> epsilonSet = new HashSet<>();
-        epsilonSet.add(Symbol.EMPTY);
-        first.put(Symbol.EMPTY, epsilonSet);
+        Set<Terminale> epsilonSet = new HashSet<>();
+        epsilonSet.add(Simbolo.EPSILON);
+        first.put(Simbolo.EPSILON, epsilonSet);
 
-        for (Term t : grammar.getTerminals()) {
-            Set<Term> set = new HashSet<>();
+        for (Terminale t : grammatica.getTerminals()) {
+            Set<Terminale> set = new HashSet<>();
             set.add(t);
             first.put(t, set);
         }
-        for (NonTerm t : grammar.getNonTerminals()) {
+        for (NonTerminale t : grammatica.getNonTerminals()) {
             first.put(t, new HashSet<>());
         }
 
@@ -36,21 +36,21 @@ public class AwesomeLLCalc implements LLCalc {
         while (diff) {
             diff = false;
 
-            for (Rule r : grammar.getRules()) {
-                List<Symbol> beta = r.getRHS();
+            for (Regola r : grammatica.getRules()) {
+                List<Simbolo> beta = r.getRHS();
 
-                Set<Term> rhs = new HashSet<>(first.get(beta.get(0)));
-                rhs.remove(Symbol.EMPTY);
+                Set<Terminale> rhs = new HashSet<>(first.get(beta.get(0)));
+                rhs.remove(Simbolo.EPSILON);
 
                 int i = 0;
-                while (i < beta.size() - 1 && first.get(beta.get(i)).contains(Symbol.EMPTY)) {
+                while (i < beta.size() - 1 && first.get(beta.get(i)).contains(Simbolo.EPSILON)) {
                     rhs.addAll(first.get(beta.get(i + 1)));
-                    rhs.remove(Symbol.EMPTY);
+                    rhs.remove(Simbolo.EPSILON);
                     i++;
                 }
 
-                if (i == beta.size() - 1 && first.get(beta.get(i)).contains(Symbol.EMPTY)) {
-                    rhs.add(Symbol.EMPTY);
+                if (i == beta.size() - 1 && first.get(beta.get(i)).contains(Simbolo.EPSILON)) {
+                    rhs.add(Simbolo.EPSILON);
                 }
 
                 int oldLength = first.get(r.getLHS()).size();
@@ -63,30 +63,30 @@ public class AwesomeLLCalc implements LLCalc {
     public void calcFollow() {
         follow = new HashMap<>();
 
-        for (NonTerm t : grammar.getNonTerminals()) {
+        for (NonTerminale t : grammatica.getNonTerminals()) {
             follow.put(t, new HashSet<>());
         }
 
-        Set<Term> eofSet = new HashSet<>();
-        eofSet.add(Symbol.EOF);
-        follow.put(grammar.getStart(), eofSet);
+        Set<Terminale> eofSet = new HashSet<>();
+        eofSet.add(Simbolo.EOF);
+        follow.put(grammatica.getStart(), eofSet);
 
         boolean diff = true;
         while (diff) {
             diff = false;
 
-            for (Rule r : grammar.getRules()) {
-                Set<Term> trailer = new HashSet<>(follow.get(r.getLHS()));
+            for (Regola r : grammatica.getRules()) {
+                Set<Terminale> trailer = new HashSet<>(follow.get(r.getLHS()));
 
-                List<Symbol> beta = r.getRHS();
+                List<Simbolo> beta = r.getRHS();
                 for (int i = beta.size() - 1; i >= 0; i--) {
-                    if (beta.get(i) instanceof NonTerm) {
+                    if (beta.get(i) instanceof NonTerminale) {
                         int oldLength = follow.get(beta.get(i)).size();
                         follow.get(beta.get(i)).addAll(trailer);
                         diff = diff || oldLength < follow.get(beta.get(i)).size();
-                        if (first.get(beta.get(i)).contains(Symbol.EMPTY)) {
+                        if (first.get(beta.get(i)).contains(Simbolo.EPSILON)) {
                             trailer.addAll(first.get(beta.get(i)));
-                            trailer.remove(Symbol.EMPTY);
+                            trailer.remove(Simbolo.EPSILON);
                         } else {
                             trailer = new HashSet<>(first.get(beta.get(i)));
                         }
@@ -100,33 +100,33 @@ public class AwesomeLLCalc implements LLCalc {
 
     public void calcFirstp() {
         firstp = new HashMap<>();
-        for (Rule r : grammar.getRules()) {
-            Set<Term> firstSymbols = new HashSet<>(first.get(r.getRHS().get(0)));
+        for (Regola r : grammatica.getRules()) {
+            Set<Terminale> firstSymbols = new HashSet<>(first.get(r.getRHS().get(0)));
             int i = 1;
-            while (i < r.getRHS().size() - 1 && first.get(r.getRHS().get(i)).contains(Symbol.EMPTY)) {
+            while (i < r.getRHS().size() - 1 && first.get(r.getRHS().get(i)).contains(Simbolo.EPSILON)) {
                 firstSymbols.addAll(first.get(r.getRHS().get(i)));
                 i++;
             }
 
             firstp.put(r, firstSymbols);
-            if (firstSymbols.contains(Symbol.EMPTY)) {
+            if (firstSymbols.contains(Simbolo.EPSILON)) {
                 firstp.get(r).addAll(follow.get(r.getLHS()));
             }
         }
     }
 
     @Override
-    public Map<Symbol, Set<Term>> getFirst() {
+    public Map<Simbolo, Set<Terminale>> getFirst() {
         return first;
     }
 
     @Override
-    public Map<NonTerm, Set<Term>> getFollow() {
+    public Map<NonTerminale, Set<Terminale>> getFollow() {
         return follow;
     }
 
     @Override
-    public Map<Rule, Set<Term>> getFirstp() {
+    public Map<Regola, Set<Terminale>> getFirstp() {
         return firstp;
     }
 

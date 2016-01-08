@@ -1,7 +1,7 @@
-public class Term implements Symbol {
-
-	public Term(String name) {
-		this.name = name;
+public class NonTerminale implements Simbolo {
+	/** Constructs a non-terminal with a given name. */
+	public NonTerminale(String name) {
+		this.name = name.toUpperCase();
 	}
 
 	@Override
@@ -25,10 +25,10 @@ public class Term implements Symbol {
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
-		} else if (!(obj instanceof Term)) {
+		} else if (!(obj instanceof NonTerminale)) {
 			return false;
 		}
-		Term other = (Term) obj;
+		NonTerminale other = (NonTerminale) obj;
 		return name.equals(other.name);
 	}
 }

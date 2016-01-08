@@ -3,34 +3,34 @@ import java.util.*;
 /**
  * Collection of rules with a start symbol.
  */
-public class Grammar {
+public class Grammatica {
 
-	private final NonTerm start;
-	private final List<Rule> rules;
-	private final List<NonTerm> lhss;
-	private final List<NonTerm> nonTerminals;
-	private final List<Term> terminals;
+	private final NonTerminale start;
+	private final List<Regola> regola;
+	private final List<NonTerminale> lhss;
+	private final List<NonTerminale> nonTerminals;
+	private final List<Terminale> terminals;
 	//private final Map<NonTerm, List<Rule>> ruleMap;
 	
 	
-	public Grammar(NonTerm start, List<Rule> rules, List<NonTerm> lhss, List<NonTerm> nonTerminals, List<Term> terminals){
+	public Grammatica(NonTerminale start, List<Regola> regola, List<NonTerminale> lhss, List<NonTerminale> nonTerminals, List<Terminale> terminals){
 		this.start = start;
-		this.rules = rules;
+		this.regola = regola;
 		this.lhss = lhss;
 		this.nonTerminals = nonTerminals;
 		this.terminals = terminals;
 	}
 	
-	public Grammar(NonTerm start) {
+	public Grammatica(NonTerminale start) {
 		this.start = start;
-		this.rules = new ArrayList<>();
-		this.lhss = new LinkedList<NonTerm>();
+		this.regola = new ArrayList<>();
+		this.lhss = new LinkedList<NonTerminale>();
 		this.nonTerminals = new LinkedList<>();
 		this.terminals = new LinkedList<>();
 	}
 
 	/** Returns the start symbol of this grammar. */
-	public NonTerm getStart() {
+	public NonTerminale getStart() {
 		return start;
 	}
 
@@ -77,23 +77,23 @@ public class Grammar {
 	}*/
 	
 	/** Returns all rules of this grammar. */
-	public List<Rule> getRules() {
-		return rules;
+	public List<Regola> getRules() {
+		return regola;
 	}
 	
 	
-	public List<NonTerm> getLhss(){
+	public List<NonTerminale> getLhss(){
 		return lhss;
 	}
 	
 	
-	public List<NonTerm> getNonTerminals() {
+	public List<NonTerminale> getNonTerminals() {
 		return nonTerminals;
 	}
 
 
 	/** Returns the set of all terminals in the RHSs of this grammar. */
-	public List<Term> getTerminals() {
+	public List<Terminale> getTerminals() {
 		return terminals;
 	}
 	

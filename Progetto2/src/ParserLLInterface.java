@@ -1,16 +1,15 @@
 import java.util.Map;
 import java.util.Set;
 
-public interface LLCalc {
+public interface ParserLLInterface {
 	/** Returns the FIRST-map for the grammar of this calculator instance. */
-	public Map<Symbol, Set<Term>> getFirst();
+	public Map<Simbolo, Set<Terminale>> getFirst();
 
 	/** Returns the FOLLOW-map for the grammar of this calculator instance. */
-	public Map<NonTerm, Set<Term>> getFollow();
+	public Map<NonTerminale, Set<Terminale>> getFollow();
 
 	/** Returns the FIRST+-map for the grammar of this calculator instance. */
-	public Map<Rule, Set<Term>> getFirstp();
+	public Map<Regola, Set<Terminale>> getFirstp();
 
-	/** Indicates if the grammar of this calculator instance is LL(1). */
 	public boolean isLL1();
 }
