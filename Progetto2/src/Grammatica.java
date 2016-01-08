@@ -23,13 +23,8 @@ public class Grammatica {
 	
 	public Grammatica(NonTerminale start) {
 		this.start = start;
-<<<<<<< HEAD:Progetto2/src/Grammatica.java
 		this.regola = new ArrayList<>();
 		this.lhss = new LinkedList<NonTerminale>();
-=======
-		this.rules = new LinkedList<>();
-		this.lhss = new LinkedList<NonTerm>();
->>>>>>> origin/master:Progetto2/src/Grammar.java
 		this.nonTerminals = new LinkedList<>();
 		this.terminals = new LinkedList<>();
 	}

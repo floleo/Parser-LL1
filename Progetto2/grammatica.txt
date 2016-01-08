@@ -1,0 +1,5 @@
+Terminali: [a, b]
+Non terminali: [A, B]
+Start Symbol: A
+A->[B, B]
+B->[A, A]

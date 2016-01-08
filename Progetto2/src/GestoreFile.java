@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -20,14 +21,23 @@ public class GestoreFile {
 		f.createNewFile();
 	}
 	
-	public void scriviFile(LinkedList<Terminale> terminals,LinkedList<NonTerminale> nonTerminals,ArrayList<Regola> regola){
-		PrintWriter w;
+	public void scriviFile(Grammatica g){
+		PrintWriter pr;
 		try {
-			w = new PrintWriter(new FileWriter(f));
+			/*w = new PrintWriter(new FileWriter(f));
 	        for(Terminale t: terminals) w.println(t.toString());
 	        for(NonTerminale nt: nonTerminals) w.println(nt.toString());
 	        for(Regola r: regola) w.println(r.toString());
-	        w.close();
+	        w.close();*/
+			pr = new PrintWriter (new FileWriter(f), true);
+			pr.println("Terminali: " + g.getTerminals());
+			            pr.println("Non terminali: " + g.getNonTerminals());
+			             pr.println("Start Symbol: " + g.getStart());
+			             List<Regola> lis = g.getRules();
+			             ListIterator<Regola> prod = lis.listIterator();
+			             while(prod.hasNext()){
+			             pr.println(prod.next());
+			            }
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -3,6 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -68,7 +69,7 @@ public class Main {
 	                    		nonTerminals.add(nt);
 		                    }
 	                    	
-<<<<<<< HEAD
+
 	                    	System.out.println("Inserire lo start symbol: ");
 	                    	NonTerminale s = new NonTerminale(br.readLine());
 	                    	if(!nonTerminals.contains(s))
@@ -81,18 +82,7 @@ public class Main {
 	                    	int right = 0;
 	                    	NonTerminale lhs;
 	                    	List<Simbolo> rhs = new LinkedList<Simbolo>();
-=======
-	                    	System.out.println("Inserire lo start symbol:");
-	                    	NonTerm s = new NonTerm(br.readLine());
 
-	                    	LinkedList<Rule> rules = new LinkedList<Rule>();
-	                    	List<NonTerm> lhss = new LinkedList<NonTerm>();
-	                    	Rule production;
-	                    	int rule = 0;
-	                    	int right = 0;
-	                    	NonTerm lhs;
-	                    	List<Symbol> rhs = null;
->>>>>>> origin/master
 	                    	System.out.println("Inserire il numero di produzioni della grammatica:");
 	                    	rule = Integer.parseInt(br.readLine());
 	                    	String noterm;
@@ -120,7 +110,7 @@ public class Main {
 
 		                    	System.out.println("Inserisci il numero di simboli presenti nella parte destra:");
 		                    	right = Integer.parseInt(br.readLine());
-	                    		rhs = new LinkedList<Symbol>();
+	                    		rhs = new LinkedList<Simbolo>();
 		                    	for(l=0; l<right;l++){
 		                    		String symbol;
 		                    		NonTerminale ntsym;
@@ -145,16 +135,13 @@ public class Main {
 	                    		System.out.println("Produzione aggiunta con successo!");
 	                    	}
 	                    	
-<<<<<<< HEAD
 	                    	Grammatica g = new Grammatica(s,regola,lhss,nonTerminals,terminals);
-=======
-	                    	Grammar g = new Grammar(s,rules,lhss,nonTerminals,terminals);
-	                    	salvaGrammatica(g);
->>>>>>> origin/master
+
 	                    	System.out.println("Grammatica inserita con successo!");
 	                    	System.out.println("Inserire il nome del file su cui salvare la grammatica: ");
 	                    	gf=new GestoreFile(br.readLine());
-	                    	gf.scriviFile(terminals, nonTerminals, regola);
+	                    	//gf.scriviFile(terminals, nonTerminals, regola);
+	                    	gf.scriviFile(g);
 	                    	System.out.println("Inserimento su file completato con successo!");
 	                    	
 	                        break;
@@ -173,22 +160,4 @@ public class Main {
 	            br.close();
 	        }
 	    }
-	
-public static void salvaGrammatica(Grammar g){
-	PrintWriter pr;
-    try {
-        pr = new PrintWriter (new FileWriter("Grammatica.txt"), true);
-            pr.println("Terminali: " + g.getTerminals());
-            pr.println("Non terminali: " + g.getNonTerminals());
-            pr.println("Start Symbol: " + g.getStart());
-            List<Rule> lis = g.getRules();
-            ListIterator<Rule> prod = lis.listIterator();
-            while(prod.hasNext()){
-            pr.println(prod.next());
-            }
-    } catch (IOException ex) {
-        Logger.getLogger(Grammar.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    }
-	
-	}
+}
