@@ -6,14 +6,14 @@ import java.util.*;
 public class Grammatica {
 
 	private final NonTerminale start;
-	private final List<Regola> regola;
+	private final List<Produzione> regola;
 	private final List<NonTerminale> lhss;
 	private final List<NonTerminale> nonTerminals;
 	private final List<Terminale> terminals;
 	//private final Map<NonTerm, List<Rule>> ruleMap;
 	
 	
-	public Grammatica(NonTerminale start, List<Regola> regola, List<NonTerminale> lhss, List<NonTerminale> nonTerminals, List<Terminale> terminals){
+	public Grammatica(NonTerminale start, List<Produzione> regola, List<NonTerminale> lhss, List<NonTerminale> nonTerminals, List<Terminale> terminals){
 		this.start = start;
 		this.regola = regola;
 		this.lhss = lhss;
@@ -77,7 +77,7 @@ public class Grammatica {
 	}*/
 	
 	/** Returns all rules of this grammar. */
-	public List<Regola> getRules() {
+	public List<Produzione> getRules() {
 		return regola;
 	}
 	

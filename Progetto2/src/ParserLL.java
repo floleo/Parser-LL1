@@ -4,7 +4,7 @@ public class ParserLL implements ParserLLInterface {
     private Grammatica grammatica;
     private Map<Simbolo, Set<Terminale>> first;
     private Map<NonTerminale,Set<Terminale>> follow;
-    private Map<Regola, Set<Terminale>> firstp;
+    private Map<Produzione, Set<Terminale>> firstp;
 
     public ParserLL(Grammatica grammatica) {
         this.grammatica = grammatica;
@@ -36,7 +36,7 @@ public class ParserLL implements ParserLLInterface {
         while (diff) {
             diff = false;
 
-            for (Regola r : grammatica.getRules()) {
+            for (Produzione r : grammatica.getRules()) {
                 List<Simbolo> beta = r.getRHS();
 
                 Set<Terminale> rhs = new HashSet<>(first.get(beta.get(0)));
@@ -75,7 +75,7 @@ public class ParserLL implements ParserLLInterface {
         while (diff) {
             diff = false;
 
-            for (Regola r : grammatica.getRules()) {
+            for (Produzione r : grammatica.getRules()) {
                 Set<Terminale> trailer = new HashSet<>(follow.get(r.getLHS()));
 
                 List<Simbolo> beta = r.getRHS();
@@ -100,7 +100,7 @@ public class ParserLL implements ParserLLInterface {
 
     public void calcPredict() {
         firstp = new HashMap<>();
-        for (Regola r : grammatica.getRules()) {
+        for (Produzione r : grammatica.getRules()) {
             Set<Terminale> firstSymbols = new HashSet<>(first.get(r.getRHS().get(0)));
             int i = 1;
             while (i < r.getRHS().size() - 1 && first.get(r.getRHS().get(i)).contains(Simbolo.EPSILON)) {
@@ -126,7 +126,7 @@ public class ParserLL implements ParserLLInterface {
     }
 
     @Override
-    public Map<Regola, Set<Terminale>> getPredict() {
+    public Map<Produzione, Set<Terminale>> getPredict() {
         return firstp;
     }
 

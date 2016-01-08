@@ -45,7 +45,7 @@ public class Main {
 	                    			s=br.readLine();
 	                    			t = new Terminale(s);
 	                    			if(!t.checkTerminale()) 
-	                    				System.out.println("Il terminale può essere solo un numero o un carattere minuscolo");
+	                    				System.out.println("Il terminale non può essere un carattere maiuscolo");
 	                    		}while(!t.checkTerminale());
 	                    		terminals.add(t);
 	                    	}
@@ -73,9 +73,9 @@ public class Main {
 	                    	if(!nonTerminals.contains(s))
 	                    		nonTerminals.add(s);
 	                    	
-	                    	ArrayList<Regola> regola = new ArrayList<Regola>();
+	                    	ArrayList<Produzione> regola = new ArrayList<Produzione>();
 	                    	List<NonTerminale> lhss = new LinkedList<NonTerminale>();
-	                    	Regola production;
+	                    	Produzione production;
 	                    	int rule = 0;
 	                    	int right = 0;
 	                    	NonTerminale lhs;
@@ -102,7 +102,7 @@ public class Main {
 	                    		if(b) System.out.println("Non terminale non valido. Riprova");
 		                    	}while(b);
 
-		                    	System.out.println("Inserisci il numero di simboli presenti nella parte destra(0 se è epsilon):");
+		                    	System.out.println("Inserisci il numero di simboli presenti nella parte destra (0 se è epsilon):");
 		                    	right = Integer.parseInt(br.readLine());
 		                    	rhs = new LinkedList<Simbolo>();
 		                    	if(right==0){
@@ -128,7 +128,7 @@ public class Main {
 		                    		}while(!nonTerminals.contains(ntsym)&&!terminals.contains(tsym));
 		                    	}
 		                    	}
-		                    	production = new Regola(lhs,rhs);
+		                    	production = new Produzione(lhs,rhs);
 		                    	lhss.add(lhs);
 	                    		regola.add(production);
 	                    		System.out.println("Produzione aggiunta con successo!");
@@ -139,7 +139,6 @@ public class Main {
 	                    	System.out.println("Grammatica inserita con successo!");
 	                    	System.out.println("Inserire il nome del file su cui salvare la grammatica(inclusa l'estensione, es. prova.txt): ");
 	                    	gf=new GestoreFile(br.readLine());
-	                    	//gf.scriviFile(terminals, nonTerminals, regola);
 	                    	gf.scriviFile(g);
 	                    	System.out.println("Inserimento su file completato con successo!");
 	                    	gf.stampaFile(g);

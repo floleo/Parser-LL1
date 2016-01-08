@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 public class Terminale implements Simbolo {
 
 	private final String name;
-	private static String exp_name = "[a-z0-9]";
+	private static String exp_name = "[^A-Z]";
 	public Terminale(String name) {
 		this.name = name;
 	}

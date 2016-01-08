@@ -28,8 +28,8 @@ public class GestoreFile {
 		System.out.println("Terminali: " + g.getTerminals());
 		System.out.println("Non terminali: " + g.getNonTerminals());
 		System.out.println("Start Symbol: " + g.getStart());
-		List<Regola> lis = g.getRules();
-		ListIterator<Regola> prod = lis.listIterator();
+		List<Produzione> lis = g.getRules();
+		ListIterator<Produzione> prod = lis.listIterator();
 		while(prod.hasNext()){
 			System.out.println(prod.next());
 		 }
@@ -48,7 +48,7 @@ public class GestoreFile {
 		}
 	}
 	
-	public Grammatica leggiFile(){
+	/*public Grammatica leggiFile(){
         ObjectInputStream ois;
         FileInputStream fp;
         Grammatica g = new Grammatica();
@@ -66,8 +66,8 @@ public class GestoreFile {
         }
         
         return g;
-    }
-	/*
+    }*/
+	
 	public Grammatica leggiFile() throws FileNotFoundException{
 		Scanner s=new Scanner(new FileReader(f));
 		Pattern pattern = Pattern.compile("\\[\\,");
@@ -75,12 +75,13 @@ public class GestoreFile {
 		Grammatica g;
 		String str;
 		NonTerminale start= null;
-		List<Regola> regola=new LinkedList<>();
+		List<Produzione> regola=new LinkedList<>();
 		List<NonTerminale> lhss=new LinkedList<NonTerminale>();
 		List<NonTerminale> nonTerminals= new LinkedList<>();
 		List<Terminale> terminals=new LinkedList<>();
 		while (s.hasNext()){
 			do{
+				str=s.next();
 				Terminale t = new Terminale(str);
 				terminals.add(t);
 			}while(s.findInLine(pattern)=="]");
@@ -90,7 +91,7 @@ public class GestoreFile {
 			}
 			start = new NonTerminale(s.nextLine());
             
-            Regola reg;
+            Produzione reg;
             while((str = s.next())!="]"){
 				NonTerminale nt = new NonTerminale(str);
 				LinkedList<Simbolo> rhs = new LinkedList<>();
@@ -110,7 +111,7 @@ public class GestoreFile {
 						rhs.add(nt2);
 					}
 				}
-				reg = new Regola(nt,rhs);
+				reg = new Produzione(nt,rhs);
 				regola.add(reg);
             }
 		}
@@ -118,5 +119,5 @@ public class GestoreFile {
         g = new Grammatica(start, regola, lhss, nonTerminals, terminals);
 		return g;
 	}
-	*/
+	
 }

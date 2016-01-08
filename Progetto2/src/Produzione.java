@@ -5,13 +5,13 @@ import java.util.List;
  * A rule consists of a left hand side (LHS, a {@link NonTerminale}) 
  * and a right hand side (RHS, a string of {@link Simbolo}s).
  */
-public class Regola {
+public class Produzione {
 	
 	private final NonTerminale lhs;
 	private final List<Simbolo> rhs;
 
 	/** Constructs a rule from a given lhs and rhs. */
-	public Regola(NonTerminale lhs, List<Simbolo> rhs) {
+	public Produzione(NonTerminale lhs, List<Simbolo> rhs) {
 		this.lhs = lhs;
 		this.rhs = rhs;
 	}

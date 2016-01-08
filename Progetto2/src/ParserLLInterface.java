@@ -9,7 +9,7 @@ public interface ParserLLInterface {
 	public Map<NonTerminale, Set<Terminale>> getFollow();
 
 	/** Returns the FIRST+-map for the grammar of this calculator instance. */
-	public Map<Regola, Set<Terminale>> getPredict();
+	public Map<Produzione, Set<Terminale>> getPredict();
 
 	public boolean isLL1();
 }
