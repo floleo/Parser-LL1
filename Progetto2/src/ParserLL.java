@@ -15,9 +15,6 @@ public class ParserLL {
 
     public void calcFirst() {
         first = new HashMap<>();
-        Set<Terminale> eofSet = new HashSet<>();
-        eofSet.add(Simbolo.EOF);
-        first.put(Simbolo.EOF, eofSet);
 
         Set<Terminale> epsilonSet = new HashSet<>();
         epsilonSet.add(Simbolo.EPSILON);
@@ -40,12 +37,12 @@ public class ParserLL {
                 List<Simbolo> beta = r.getRHS();
 
                 Set<Terminale> rhs = new HashSet<>(first.get(beta.get(0)));
-                rhs.remove(Simbolo.EPSILON);
+                //rhs.remove(Simbolo.EPSILON);
 
                 int i = 0;
                 while (i < beta.size() - 1 && first.get(beta.get(i)).contains(Simbolo.EPSILON)) {
                     rhs.addAll(first.get(beta.get(i + 1)));
-                    rhs.remove(Simbolo.EPSILON);
+                    //rhs.remove(Simbolo.EPSILON);
                     i++;
                 }
 
@@ -76,22 +73,22 @@ public class ParserLL {
             diff = false;
 
             for (Produzione r : grammatica.getRules()) {
-                Set<Terminale> trailer = new HashSet<>(follow.get(r.getLHS()));
+                Set<Terminale> p = new HashSet<>(follow.get(r.getLHS()));
 
                 List<Simbolo> beta = r.getRHS();
                 for (int i = beta.size() - 1; i >= 0; i--) {
                     if (beta.get(i) instanceof NonTerminale) {
                         int oldLength = follow.get(beta.get(i)).size();
-                        follow.get(beta.get(i)).addAll(trailer);
+                        follow.get(beta.get(i)).addAll(p);
                         diff = diff || oldLength < follow.get(beta.get(i)).size();
                         if (first.get(beta.get(i)).contains(Simbolo.EPSILON)) {
-                            trailer.addAll(first.get(beta.get(i)));
-                            trailer.remove(Simbolo.EPSILON);
+                            p.addAll(first.get(beta.get(i)));
+                            p.remove(Simbolo.EPSILON);
                         } else {
-                            trailer = new HashSet<>(first.get(beta.get(i)));
+                            p = new HashSet<>(first.get(beta.get(i)));
                         }
                     } else {
-                        trailer = new HashSet<>(first.get(beta.get(i)));
+                        p = new HashSet<>(first.get(beta.get(i)));
                     }
                 }
             }
@@ -101,15 +98,15 @@ public class ParserLL {
     public void calcPredict() {
         predict = new HashMap<>();
         for (Produzione r : grammatica.getRules()) {
-            Set<Terminale> firstSymbols = new HashSet<>(first.get(r.getRHS().get(0)));
+            Set<Terminale> pr = new HashSet<>(first.get(r.getRHS().get(0)));
             int i = 1;
             while (i < r.getRHS().size() - 1 && first.get(r.getRHS().get(i)).contains(Simbolo.EPSILON)) {
-                firstSymbols.addAll(first.get(r.getRHS().get(i)));
+                pr.addAll(first.get(r.getRHS().get(i)));
                 i++;
             }
 
-            predict.put(r, firstSymbols);
-            if (firstSymbols.contains(Simbolo.EPSILON)) {
+            predict.put(r, pr);
+            if (pr.contains(Simbolo.EPSILON)) {
                 predict.get(r).addAll(follow.get(r.getLHS()));
             }
         }

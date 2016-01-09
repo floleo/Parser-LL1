@@ -164,6 +164,8 @@ public class Main {
 	                    	gf.stampaFile(g);
 	                    	ParserLL ll1=new ParserLL(g);
 	                    	ll1.isLL1(g.getRules());
+	                    	//System.out.println("L'insieme dei first e': "+ll1.getFirst());
+	                    	//System.out.println("L'insieme dei follow e': "+ll1.getFollow());
 	                        break;
 	                    case 0:
 	                        System.out.println("Programma terminato");

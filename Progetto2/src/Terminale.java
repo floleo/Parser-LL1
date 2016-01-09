@@ -4,9 +4,6 @@ import java.util.regex.Pattern;
 
 public class Terminale implements Simbolo, Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private final String name;
 	private static String exp_name = "[^A-Z]";
@@ -35,19 +32,4 @@ public class Terminale implements Simbolo, Serializable {
 		return getName();
 	}
 
-	@Override
-	public int hashCode() {
-		return name.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		} else if (!(obj instanceof Terminale)) {
-			return false;
-		}
-		Terminale other = (Terminale) obj;
-		return name.equals(other.name);
-	}
 }
