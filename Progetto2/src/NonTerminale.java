@@ -36,5 +36,21 @@ public class NonTerminale implements Simbolo, Serializable {
 	public String toString() {
 		return getName();
 	}
+	
+	@Override
+	public int hashCode() {
+		return name.hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		} else if (!(obj instanceof NonTerminale)) {
+			return false;
+		}
+		NonTerminale other = (NonTerminale) obj;
+		return name.equals(other.name);
+	}
 
 }

@@ -13,6 +13,7 @@ public class Main {
 
 	        int sc = 0;
 	        GestoreFile gf;
+	        GestoreFile gf2;
 	        BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
 	        
 	        try{
@@ -25,9 +26,9 @@ public class Main {
 	                switch(sc){
 	                    case 1:
 	                    	System.out.println("Inserisci il nome del file da cui leggere la grammatica: ");
-	                    	gf=new GestoreFile(br.readLine());
-	                    	Grammatica gr = gf.leggiFile();
-	                    	gf.stampaFile(gr);
+	                    	gf2=new GestoreFile(br.readLine());
+	                    	Grammatica gr = gf2.leggiFile();
+	                    	gf2.stampaFile(gr);
 	                    	int sc1 = 0;
 	                    	do{
 	        	                System.out.println("1->Verifica se la grammatica selezionata è context-free \n"
@@ -158,15 +159,17 @@ public class Main {
 
 	                    	System.out.println("Grammatica inserita con successo!");
 	                    	System.out.println("Inserire il nome del file su cui salvare la grammatica(inclusa l'estensione, es. prova.txt): ");
-	                    	gf=new GestoreFile(br.readLine());
+	                    	gf=new GestoreFile(br.read()+".txt");
+	                    	gf2=new GestoreFile(br.readLine());
 	                    	gf.scriviFile(g);
+	                    	gf2.scriviAltroFile(g);
 	                    	System.out.println("Inserimento su file completato con successo!");
 	                    	gf.stampaFile(g);
 	                    	ParserLL ll1=new ParserLL(g);
 	                    	ll1.isLL1(g.getRules());
 	                    	//System.out.println("L'insieme dei first e': "+ll1.getFirst());
 	                    	//System.out.println("L'insieme dei follow e': "+ll1.getFollow());
-	                    	//System.out.println("L'insieme dei predict e': "+ll1.getPredict());
+	                    	System.out.println("L'insieme dei predict e': "+ll1.getPredict());
 	                        break;
 	                    case 0:
 	                        System.out.println("Programma terminato");
