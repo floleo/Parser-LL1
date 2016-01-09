@@ -1,0 +1,4 @@
+[c, d]
+[A, S]
+S
+[S->[A, c], A->[d, c, c], A->[epsilon]]
