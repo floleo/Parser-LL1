@@ -33,7 +33,7 @@ public class GestoreFile {
 		 }
 	}
 	
-	/*public void scriviFile(Grammatica g){
+	public void scriviAltroFile(Grammatica g){
 		ObjectOutputStream os= null;
         
         try{
@@ -45,7 +45,7 @@ public class GestoreFile {
         catch(Exception e){
             System.out.println("Errore nella scrittura del file !!");
         }
-	}*/
+	}
 	
 	//dobbiamo farlo per forza così se no sul file scrive caratteri incomprensibili
 	public void scriviFile(Grammatica g){
