@@ -28,7 +28,53 @@ public class Main {
 	                    	gf=new GestoreFile(br.readLine());
 	                    	Grammatica gr = gf.leggiFile();
 	                    	gf.stampaFile(gr);
-	                        break;
+	                    	int sc1 = 0;
+	                    	do{
+	        	                System.out.println("1->Verifica se la grammatica selezionata è context-free \n"
+	        	                        + "2->Verifica se la grammatica selezionata è LL(1) \n"
+	        	                        + "0-->Indietro");
+	                    	sc1 = Integer.parseInt(br.readLine());
+	    	                switch(sc1){
+	    	                    case 1:
+	    	                    	
+	    	                break;
+	    	                    case 2:
+	    	                    	List<Produzione> produzioni = gr.getRules();
+	    	                    	ListIterator<Produzione> it = produzioni.listIterator();
+	    	                    	ListIterator<Produzione> it2 = produzioni.listIterator();
+	    	                    	Produzione p;
+	    	                    	Produzione p2;
+	    	                    	boolean b = true, c = false;
+	    	                    	while(it.hasNext()){
+	    	                    		p = it.next();
+	    	                    		while(it2.hasNext()){
+	    	                    			p2 = it2.next();
+	    	                    			if(p.getLHS().equals(p2.getLHS()) && (!p.getRHS().equals(p2.getRHS()))){
+	    	                    				if(p.getRHS().get(0).equals(p2.getRHS().get(0))){
+	    	                    					c = true;
+	    	                    					b = false;
+	    	                    				}
+	    	                    			}
+	    	                    		}
+	    	                    		if(p.getLHS().equals(p.getRHS().get(0))){
+	    	                    			System.out.println("E' presente una ricorsione sinistra --> No LL(1)");
+    	                    				b = false;
+	    	                    		}
+	    	                    		do{
+	    	                    			it2.previous();
+	    	                    		}while(it2.hasPrevious());
+	    	                    	}
+	    	                    	if(c) System.out.println("Sono presenti prefissi comuni --> No LL(1)");
+	    	                    	if(b) System.out.println("La grammatica è LL(1)");
+	    	                    	else System.out.println("La grammatica non è LL(1)");
+	        	            break;
+	    	                    case 0:
+	    	                        break;
+	    	                    default:
+	    	                        System.out.println("Tasto non valido...riprovare ");
+	    	                }
+	    	            }while(sc1!=0);
+	                    	break;
 	                    case 2:
 	                    	System.out.println("INSERIMENTO GRAMMATICA DA TASTIERA");
 	                    	
