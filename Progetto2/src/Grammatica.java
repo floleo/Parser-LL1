@@ -40,8 +40,6 @@ public class Grammatica implements Serializable{
 	}
 
 	
-	
-	
 	/** Adds a rule to this grammar, consisting of a given LHS and
 	 * a sequence of RHS symbols.
 	 * For an empty RHS, just leave the RHS sequence empty

@@ -15,6 +15,7 @@ public class Main {
 	        int sc = 0;
 	        GestoreFile gf;
 	        GestoreFile gf2;
+	        GestoreFile gf3;
 	        BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
 	        
 	        try{
@@ -27,12 +28,13 @@ public class Main {
 	                switch(sc){
 	                    case 1:
 	                    	LinkedList<String> list=new LinkedList<>();
+	                    	gf3=new GestoreFile(list);
 	                        String uf;
 	                    	int u;
 	                    	do{
 	                    		System.out.println("Seleziona il file da cui leggere la grammatica (digitare l'indice): ");
-	                    		list = visualizzaFile();
-	                    		stampaFile(list);
+	                    		list = gf3.visualizzaFile();
+	                    		gf3.stampaFile(list);
 	                    		u = Integer.parseInt(br.readLine());
 	                    		if(u>=list.size()) System.out.println("Numero non valido");
 	                    	}while(u>=list.size());
@@ -56,6 +58,8 @@ public class Main {
 	    	                    	System.out.println("L'insieme dei first e': "+ll.getFirst());
 	    	                    	System.out.println("L'insieme dei follow e': "+ll.getFollow());
 	    	                    	System.out.println("L'insieme dei predict e': "+ll.getPredict());
+	    	                    	if(ll.LL1()) System.out.println("La grammatica è LL(1)");
+	    	                    	else System.out.println("La grammatica non è LL(1)");
 	    	                        break;
 	    	                    case 0:
 	    	                        break;
@@ -146,25 +150,25 @@ public class Main {
 		                    		eps = Terminale.EPSILON;
 		                    		rhs.add(eps);
 		                    	} else{
-	                    		for(l=0; l<right;l++){
-		                    		String symbol;
-		                    		NonTerminale ntsym;
-		                    		Terminale tsym;
+		                    		for(l=0; l<right;l++){
+		                    			String symbol;
+		                    			NonTerminale ntsym;
+		                    			Terminale tsym;
 		                    		
-		                    		do{
-		                    			System.out.println("Inserisci il simbolo (vedi lista):");
-		                    			System.out.println(terminals);
-		                    			System.out.println(nonTerminals);
-		                    			symbol = br.readLine();
-		                    			ntsym = new NonTerminale(symbol);
-		                    			tsym = new Terminale(symbol);
-		                    			if(nonTerminals.contains(ntsym)){
-		                    				rhs.add(ntsym);
-		                    			} else if(terminals.contains(tsym)){
-		                    				rhs.add(tsym);
-		                    			} else System.out.println("Simbolo non esistente. Inserire un simbolo valido");
-		                    		}while(!nonTerminals.contains(ntsym)&&!terminals.contains(tsym));
-		                    	}
+		                    			do{
+		                    				System.out.println("Inserisci il simbolo (vedi lista):");
+		                    				System.out.println(terminals);
+		                    				System.out.println(nonTerminals);
+		                    				symbol = br.readLine();
+		                    				ntsym = new NonTerminale(symbol);
+		                    				tsym = new Terminale(symbol);
+		                    				if(nonTerminals.contains(ntsym)){
+		                    					rhs.add(ntsym);
+		                    				} else if(terminals.contains(tsym)){
+		                    					rhs.add(tsym);
+		                    				} else System.out.println("Simbolo non esistente. Inserire un simbolo valido");
+		                    			}while(!nonTerminals.contains(ntsym)&&!terminals.contains(tsym));
+		                    		}
 		                    	}
 		                    	production = new Produzione(lhs,rhs);
 		                    	lhss.add(lhs);
@@ -185,9 +189,11 @@ public class Main {
 	                    	gf.stampaFile(g);
 	                    	ParserLL ll1=new ParserLL(g);
 	                    	ll1.isLL1(g.getRules());
-	                    	System.out.println("L'insieme dei first è: "+ll1.getFirst());
-	                    	System.out.println("L'insieme dei follow è: "+ll1.getFollow());
-	                    	System.out.println("L'insieme dei predict è: "+ll1.getPredict());
+	                    	System.out.println("L'insieme dei first e': "+ll1.getFirst());
+	                    	System.out.println("L'insieme dei follow e': "+ll1.getFollow());
+	                    	System.out.println("L'insieme dei predict e': "+ll1.getPredict());
+	                    	if(ll1.LL1()) System.out.println("La grammatica è LL(1)");
+	                    	else System.out.println("La grammatica non è LL(1)");
 	                        break;
 	                    case 0:
 	                        System.out.println("Programma terminato");
@@ -202,32 +208,7 @@ public class Main {
 	        }
 	        finally{
 	            br.close();
-	        }
-	        
-	        
+	        }  
         	
 	    }
-	public static LinkedList<String> visualizzaFile(){
-        File dir = new File("src\\Grammatiche\\");
-        LinkedList<String> ll = new LinkedList<>();
-        File[] files = dir.listFiles();
-        if (files == null) {
-            System.out.println("Directory errata");
-        }else{
-            for(int i=0;i<files.length;i++){
-                String st = files[i].getName();
-                if(!files[i].getName().endsWith("txt")){
-                    ll.add(st);
-                }
-            }
-        }
-        return ll;
-    } 
-	public static void stampaFile(LinkedList<String> ll){
-        System.out.println("Lista delle grammatiche");
-        for (int i=0; i<ll.size();i++){
-            System.out.println(i + " - " + ll.get(i));
-        }
-    }
-   
 }

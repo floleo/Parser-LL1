@@ -15,11 +15,16 @@ import java.util.ListIterator;
 public class GestoreFile {
 	private String nameFile;
 	private File f;
-	
+	private LinkedList<String> lis;
+ 	
 	public GestoreFile(String name) throws IOException{
 		this.nameFile=name;
 		f=new File("src\\Grammatiche\\"+name);
 		//f.createNewFile();
+	}
+	
+	public GestoreFile(LinkedList<String> lis){
+		this.lis=lis;
 	}
 	
 	public void stampaFile(Grammatica g){
@@ -82,6 +87,29 @@ public class GestoreFile {
         }
         
         return g;
+    }
+	
+	public static LinkedList<String> visualizzaFile(){
+        File dir = new File("src\\Grammatiche\\");
+        LinkedList<String> ll = new LinkedList<>();
+        File[] files = dir.listFiles();
+        if (files == null) {
+            System.out.println("Directory errata");
+        }else{
+            for(int i=0;i<files.length;i++){
+                String st = files[i].getName();
+                if(!files[i].getName().endsWith("txt")){
+                    ll.add(st);
+                }
+            }
+        }
+        return ll;
+    } 
+	public static void stampaFile(LinkedList<String> ll){
+        System.out.println("Lista delle grammatiche");
+        for (int i=0; i<ll.size();i++){
+            System.out.println(i + " - " + ll.get(i));
+        }
     }
 	
 	/*

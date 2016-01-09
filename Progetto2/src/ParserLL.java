@@ -99,11 +99,7 @@ public class ParserLL {
         predict = new HashMap<>();
         for (Produzione r : grammatica.getRules()) {
             Set<Terminale> pr = new HashSet<>(first.get(r.getRHS().get(0)));
-            /*int i = 1;
-            while (i < r.getRHS().size() - 1 && first.get(r.getRHS().get(i)).contains(Simbolo.EPSILON)) {
-                pr.addAll(first.get(r.getRHS().get(i)));
-                i++;
-            }*/
+            Set<Terminale> pr2;
 
             predict.put(r, pr);
             if (pr.contains(Simbolo.EPSILON)) {
@@ -111,10 +107,24 @@ public class ParserLL {
             	if(r.getRHS().size()==1){	
             		predict.get(r).addAll(follow.get(r.getLHS()));
             	}else{
-            		//first.remove(Simbolo.EPSILON);
-            		predict.get(r).addAll(first.get(r.getLHS()));
+            		pr2=first.get(r.getLHS());
+            		pr2.remove(Simbolo.EPSILON);
+            		predict.get(r).addAll(pr2);
             	}
             }
+            
+            /*if (pr.contains(Simbolo.EPSILON)) {
+        	pr.remove(Simbolo.EPSILON);          	
+        	for(Simbolo s : r.getRHS()){
+        		if(s==Simbolo.EPSILON && r.getRHS().size()==1){
+        			predict.get(r).addAll(follow.get(r.getLHS()));
+        		}else if(s==Simbolo.EPSILON && r.getRHS().size()>1){
+        			pr2=first.get(r.getLHS());
+        			pr2.remove(Simbolo.EPSILON);
+        			predict.get(r).addAll(pr2);        				
+       			}
+       		}
+       	}*/
         }
     }
 
@@ -160,8 +170,8 @@ public class ParserLL {
     		}while(it2.hasPrevious());
     	}
     	if(c) System.out.println("Sono presenti prefissi comuni --> No LL(1)");
-    	if(b) System.out.println("La grammatica è LL(1)");
-    	else System.out.println("La grammatica non è LL(1)");
+    	//if(b) System.out.println("La grammatica è LL(1)");
+    	//else System.out.println("La grammatica non è LL(1)");
         
     }
     
@@ -169,10 +179,12 @@ public class ParserLL {
     	for (Produzione r : grammatica.getRules()) {
     		for (Produzione r2 : grammatica.getRules()) {
     			if (r != r2) {
-    				Set<Terminale> intersection = new HashSet<>(predict.get(r));
-    				intersection.retainAll(predict.get(r2));
-    				if (!intersection.isEmpty()) {
-    					return false;
+    				if(r.getLHS()==r2.getLHS()){
+    					Set<Terminale> intersection = new HashSet<>(predict.get(r));
+    					intersection.retainAll(predict.get(r2));
+    					if (!intersection.isEmpty()) {
+    						return false;
+    					}
     				}
     			}
     		}
