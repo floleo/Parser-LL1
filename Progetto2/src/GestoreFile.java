@@ -18,7 +18,7 @@ public class GestoreFile {
 	
 	public GestoreFile(String name) throws IOException{
 		this.nameFile=name;
-		f=new File(name);
+		f=new File("src\\Grammatiche\\"+name);
 		//f.createNewFile();
 	}
 	

@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -25,8 +26,18 @@ public class Main {
 	                sc = Integer.parseInt(br.readLine());
 	                switch(sc){
 	                    case 1:
-	                    	System.out.println("Inserisci il nome del file da cui leggere la grammatica: ");
-	                    	gf2=new GestoreFile(br.readLine());
+	                    	LinkedList<String> list=new LinkedList<>();
+	                        String uf;
+	                    	int u;
+	                    	do{
+	                    		System.out.println("Seleziona il file da cui leggere la grammatica (digitare l'indice): ");
+	                    		list = visualizzaFile();
+	                    		stampaFile(list);
+	                    		u = Integer.parseInt(br.readLine());
+	                    		if(u>=list.size()) System.out.println("Numero non valido");
+	                    	}while(u>=list.size());
+	                        uf=list.get(u);
+	                    	gf2=new GestoreFile(uf);
 	                    	Grammatica gr = gf2.leggiFile();
 	                    	gf2.stampaFile(gr);
 	                    	int sc1 = 0;
@@ -42,7 +53,10 @@ public class Main {
 	    	                    case 2:
 	    	                    	ParserLL ll=new ParserLL(gr);
 	    	                    	ll.isLL1(gr.getRules());
-	        	            break;
+	    	                    	System.out.println("L'insieme dei first e': "+ll.getFirst());
+	    	                    	System.out.println("L'insieme dei follow e': "+ll.getFollow());
+	    	                    	System.out.println("L'insieme dei predict e': "+ll.getPredict());
+	    	                        break;
 	    	                    case 0:
 	    	                        break;
 	    	                    default:
@@ -110,17 +124,18 @@ public class Main {
 		                    	boolean b = true;
 		                    	ListIterator<NonTerminale> iter;
 		                    	do{
-	                    		System.out.println("Inserisci il non terminale nella parte sinistra:");
-		                    	noterm = br.readLine();
-		                    	lhs = new NonTerminale(noterm);
-		                    	iter = nonTerminals.listIterator();
-		                    	while(iter.hasNext()){
-		                    		if(iter.next().equals(lhs)){
-		                    			lhss.add(lhs);
-		                    			b = false;
+		                    		System.out.println("Inserisci il non terminale della parte sinistra (vedi lista):");
+		                    		System.out.println(nonTerminals);
+		                    		noterm = br.readLine();
+		                    		lhs = new NonTerminale(noterm);
+		                    		iter = nonTerminals.listIterator();
+		                    		while(iter.hasNext()){
+		                    			if(iter.next().equals(lhs)){
+		                    				lhss.add(lhs);
+		                    				b = false;
+		                    			}
 		                    		}
-		                    	}
-	                    		if(b) System.out.println("Non terminale non valido. Riprova");
+		                    		if(b) System.out.println("Non terminale non valido. Riprova");
 		                    	}while(b);
 
 		                    	System.out.println("Inserisci il numero di simboli presenti nella parte destra (0 se è epsilon):");
@@ -137,7 +152,9 @@ public class Main {
 		                    		Terminale tsym;
 		                    		
 		                    		do{
-		                    			System.out.println("Inserisci il simbolo:");
+		                    			System.out.println("Inserisci il simbolo (vedi lista):");
+		                    			System.out.println(terminals);
+		                    			System.out.println(nonTerminals);
 		                    			symbol = br.readLine();
 		                    			ntsym = new NonTerminale(symbol);
 		                    			tsym = new Terminale(symbol);
@@ -158,9 +175,9 @@ public class Main {
 	                    	Grammatica g = new Grammatica(s,regola,lhss,nonTerminals,terminals);
 
 	                    	System.out.println("Grammatica inserita con successo!");
-	                    	System.out.println("Inserire il nome del file su cui salvare la grammatica(inclusa l'estensione, es. prova.txt): ");
+	                    	System.out.println("Inserire il nome del file su cui salvare la grammatica(esclusa l'estensione): ");
 	                    	String f = br.readLine();
-	                    	gf=new GestoreFile(f+".txt");
+	                    	gf=new GestoreFile(f + ".txt");
 	                    	gf2=new GestoreFile(f);
 	                    	gf.scriviFile(g);
 	                    	gf2.scriviAltroFile(g);
@@ -168,9 +185,9 @@ public class Main {
 	                    	gf.stampaFile(g);
 	                    	ParserLL ll1=new ParserLL(g);
 	                    	ll1.isLL1(g.getRules());
-	                    	System.out.println("L'insieme dei first e': "+ll1.getFirst());
-	                    	System.out.println("L'insieme dei follow e': "+ll1.getFollow());
-	                    	System.out.println("L'insieme dei predict e': "+ll1.getPredict());
+	                    	System.out.println("L'insieme dei first è: "+ll1.getFirst());
+	                    	System.out.println("L'insieme dei follow è: "+ll1.getFollow());
+	                    	System.out.println("L'insieme dei predict è: "+ll1.getPredict());
 	                        break;
 	                    case 0:
 	                        System.out.println("Programma terminato");
@@ -186,5 +203,31 @@ public class Main {
 	        finally{
 	            br.close();
 	        }
+	        
+	        
+        	
 	    }
+	public static LinkedList<String> visualizzaFile(){
+        File dir = new File("src\\Grammatiche\\");
+        LinkedList<String> ll = new LinkedList<>();
+        File[] files = dir.listFiles();
+        if (files == null) {
+            System.out.println("Directory errata");
+        }else{
+            for(int i=0;i<files.length;i++){
+                String st = files[i].getName();
+                if(!files[i].getName().endsWith("txt")){
+                    ll.add(st);
+                }
+            }
+        }
+        return ll;
+    } 
+	public static void stampaFile(LinkedList<String> ll){
+        System.out.println("Lista delle grammatiche");
+        for (int i=0; i<ll.size();i++){
+            System.out.println(i + " - " + ll.get(i));
+        }
+    }
+   
 }
