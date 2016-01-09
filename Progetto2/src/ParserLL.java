@@ -99,15 +99,21 @@ public class ParserLL {
         predict = new HashMap<>();
         for (Produzione r : grammatica.getRules()) {
             Set<Terminale> pr = new HashSet<>(first.get(r.getRHS().get(0)));
-            int i = 1;
+            /*int i = 1;
             while (i < r.getRHS().size() - 1 && first.get(r.getRHS().get(i)).contains(Simbolo.EPSILON)) {
                 pr.addAll(first.get(r.getRHS().get(i)));
                 i++;
-            }
+            }*/
 
             predict.put(r, pr);
             if (pr.contains(Simbolo.EPSILON)) {
-                predict.get(r).addAll(follow.get(r.getLHS()));
+            	pr.remove(Simbolo.EPSILON);
+            	if(r.getRHS().size()==1){	
+            		predict.get(r).addAll(follow.get(r.getLHS()));
+            	}else{
+            		//first.remove(Simbolo.EPSILON);
+            		predict.get(r).addAll(first.get(r.getLHS()));
+            	}
             }
         }
     }
@@ -156,18 +162,21 @@ public class ParserLL {
     	if(c) System.out.println("Sono presenti prefissi comuni --> No LL(1)");
     	if(b) System.out.println("La grammatica è LL(1)");
     	else System.out.println("La grammatica non è LL(1)");
-        /*for (NonTerm nt : grammar.getNonTerminals()) {
-            for (Rule r : grammar.getRules(nt)) {
-                for (Rule r2 : grammar.getRules(nt)) {
-                    if (r != r2) {
-                        Set<Term> intersection = new HashSet<>(firstp.get(r));
-                        intersection.retainAll(firstp.get(r2));
-                        if (!intersection.isEmpty()) {
-                            return false;
-                        }
-                    }
-                }
-            }
-        }*/
+        
+    }
+    
+    public boolean LL1(){
+    	for (Produzione r : grammatica.getRules()) {
+    		for (Produzione r2 : grammatica.getRules()) {
+    			if (r != r2) {
+    				Set<Terminale> intersection = new HashSet<>(predict.get(r));
+    				intersection.retainAll(predict.get(r2));
+    				if (!intersection.isEmpty()) {
+    					return false;
+    				}
+    			}
+    		}
+   		}
+    	return true;
     }
 }
