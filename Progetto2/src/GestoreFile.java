@@ -3,9 +3,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -31,7 +33,7 @@ public class GestoreFile {
 		 }
 	}
 	
-	public void scriviFile(Grammatica g){
+	/*public void scriviFile(Grammatica g){
 		ObjectOutputStream os= null;
         
         try{
@@ -43,8 +45,25 @@ public class GestoreFile {
         catch(Exception e){
             System.out.println("Errore nella scrittura del file !!");
         }
+	}*/
+	
+	//dobbiamo farlo per forza così se no sul file scrive caratteri incomprensibili
+	public void scriviFile(Grammatica g){
+		PrintWriter w= null;
+        
+        try{
+        	w = new PrintWriter (new FileWriter(f), true);
+			w.println(g.getTerminals());
+			w.println(g.getNonTerminals());
+			w.println(g.getStart());
+			w.println(g.getRules());
+        }
+        catch(Exception e){
+            System.out.println("Errore nella scrittura del file !!");
+        }
 	}
 	
+	//funziona solo se usiamo file di testo con caratteri incomprensibili 
 	public Grammatica leggiFile(){
         ObjectInputStream ois = null;
         FileInputStream fp;

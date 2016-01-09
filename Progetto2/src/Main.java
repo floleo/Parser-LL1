@@ -39,34 +39,8 @@ public class Main {
 	    	                    	
 	    	                break;
 	    	                    case 2:
-	    	                    	List<Produzione> produzioni = gr.getRules();
-	    	                    	ListIterator<Produzione> it = produzioni.listIterator();
-	    	                    	ListIterator<Produzione> it2 = produzioni.listIterator();
-	    	                    	Produzione p;
-	    	                    	Produzione p2;
-	    	                    	boolean b = true, c = false;
-	    	                    	while(it.hasNext()){
-	    	                    		p = it.next();
-	    	                    		while(it2.hasNext()){
-	    	                    			p2 = it2.next();
-	    	                    			if(p.getLHS().equals(p2.getLHS()) && (!p.getRHS().equals(p2.getRHS()))){
-	    	                    				if(p.getRHS().get(0).equals(p2.getRHS().get(0))){
-	    	                    					c = true;
-	    	                    					b = false;
-	    	                    				}
-	    	                    			}
-	    	                    		}
-	    	                    		if(p.getLHS().equals(p.getRHS().get(0))){
-	    	                    			System.out.println("E' presente una ricorsione sinistra --> No LL(1)");
-    	                    				b = false;
-	    	                    		}
-	    	                    		do{
-	    	                    			it2.previous();
-	    	                    		}while(it2.hasPrevious());
-	    	                    	}
-	    	                    	if(c) System.out.println("Sono presenti prefissi comuni --> No LL(1)");
-	    	                    	if(b) System.out.println("La grammatica è LL(1)");
-	    	                    	else System.out.println("La grammatica non è LL(1)");
+	    	                    	ParserLL ll=new ParserLL(gr);
+	    	                    	ll.isLL1(gr.getRules());
 	        	            break;
 	    	                    case 0:
 	    	                        break;
@@ -188,6 +162,8 @@ public class Main {
 	                    	gf.scriviFile(g);
 	                    	System.out.println("Inserimento su file completato con successo!");
 	                    	gf.stampaFile(g);
+	                    	ParserLL ll1=new ParserLL(g);
+	                    	ll1.isLL1(g.getRules());
 	                        break;
 	                    case 0:
 	                        System.out.println("Programma terminato");
