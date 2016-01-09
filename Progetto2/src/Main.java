@@ -42,10 +42,6 @@ public class Main {
 	    	                    case 2:
 	    	                    	ParserLL ll=new ParserLL(gr);
 	    	                    	ll.isLL1(gr.getRules());
-	    	                    	System.out.println("L'insieme dei first e': "+ll.getFirst());
-	    	                    	//System.out.println("L'insieme dei follow e': "+ll1.getFollow());
-	    	                    	System.out.println("L'insieme dei predict e': "+ll.getPredict());
-	    	                        
 	        	            break;
 	    	                    case 0:
 	    	                        break;
@@ -162,17 +158,16 @@ public class Main {
 	                    	Grammatica g = new Grammatica(s,regola,lhss,nonTerminals,terminals);
 
 	                    	System.out.println("Grammatica inserita con successo!");
-	                    	System.out.println("Inserire il nome del file su cui salvare la grammatica(esclusa l'estensione): ");
-	                    	String name = br.readLine();
-	                    	gf=new GestoreFile(name+".txt");
-	                    	gf2=new GestoreFile(name);
+	                    	System.out.println("Inserire il nome del file su cui salvare la grammatica(inclusa l'estensione, es. prova.txt): ");
+	                    	gf=new GestoreFile(br.read()+".txt");
+	                    	gf2=new GestoreFile(br.readLine());
 	                    	gf.scriviFile(g);
 	                    	gf2.scriviAltroFile(g);
 	                    	System.out.println("Inserimento su file completato con successo!");
 	                    	gf.stampaFile(g);
 	                    	ParserLL ll1=new ParserLL(g);
 	                    	ll1.isLL1(g.getRules());
-	                    	System.out.println("L'insieme dei first e': "+ll1.getFirst());
+	                    	//System.out.println("L'insieme dei first e': "+ll1.getFirst());
 	                    	//System.out.println("L'insieme dei follow e': "+ll1.getFollow());
 	                    	System.out.println("L'insieme dei predict e': "+ll1.getPredict());
 	                        break;

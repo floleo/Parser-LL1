@@ -1,7 +1,5 @@
 import java.util.*;
 
-import javax.print.attribute.HashAttributeSet;
-
 public class ParserLL {
     private Grammatica grammatica;
     private Map<Simbolo, Set<Terminale>> first;
@@ -11,49 +9,54 @@ public class ParserLL {
     public ParserLL(Grammatica grammatica) {
         this.grammatica = grammatica;
         calcFirst();
-        //calcFollow();
-        //calcPredict();
+        calcFollow();
+        calcPredict();
     }
 
     public void calcFirst() {
         first = new HashMap<>();
-        Set<Terminale> rhs = new HashSet<>();
-        for (NonTerminale nt : grammatica.getNonTerminals()) {
-        	rhs = first(nt);
-        	first.put(nt, rhs);
+
+        Set<Terminale> epsilonSet = new HashSet<>();
+        epsilonSet.add(Simbolo.EPSILON);
+        first.put(Simbolo.EPSILON, epsilonSet);
+
+        for (Terminale t : grammatica.getTerminals()) {
+            Set<Terminale> set = new HashSet<>();
+            set.add(t);
+            first.put(t, set);
+        }
+        for (NonTerminale t : grammatica.getNonTerminals()) {
+            first.put(t, new HashSet<>());
+        }
+
+        boolean diff = true;
+        while (diff) {
+            diff = false;
+
+            for (Produzione r : grammatica.getRules()) {
+                List<Simbolo> beta = r.getRHS();
+
+                Set<Terminale> rhs = new HashSet<>(first.get(beta.get(0)));
+                //rhs.remove(Simbolo.EPSILON);
+
+                int i = 0;
+                while (i < beta.size() - 1 && first.get(beta.get(i)).contains(Simbolo.EPSILON)) {
+                    rhs.addAll(first.get(beta.get(i + 1)));
+                    //rhs.remove(Simbolo.EPSILON);
+                    i++;
+                }
+
+                if (i == beta.size() - 1 && first.get(beta.get(i)).contains(Simbolo.EPSILON)) {
+                    rhs.add(Simbolo.EPSILON);
+                }
+
+                int oldLength = first.get(r.getLHS()).size();
+                first.get(r.getLHS()).addAll(rhs);
+                diff = diff || oldLength < first.get(r.getLHS()).size();
+            }
         }
     }
 
-    public Set<Terminale> first(NonTerminale nt){
-		Set<Terminale> rhs = new HashSet<>();
-		Set<Terminale> rhs2 = new HashSet<>();
-		List<Simbolo> beta = new LinkedList<Simbolo>();
-    	Terminale tsym;
-		NonTerminale ntsym;
-		Terminale epsilon = Terminale.EPSILON;
-		for (Produzione r : grammatica.getRules()) {
-			if(r.getLHS().equals(nt)){
-				beta = r.getRHS();
-				if(beta.get(0) instanceof NonTerminale){
-					ntsym = (NonTerminale)beta.get(0);
-					if(ntsym.checkNonTerminale() && !rhs.contains(ntsym)){
-						rhs2 = first(ntsym);
-						Iterator<Terminale> it = rhs2.iterator();
-						while(it.hasNext())
-							rhs.add(it.next());
-					}
-				}
-				if(beta.get(0) instanceof Terminale){
-					tsym = (Terminale)beta.get(0);
-					if((tsym.equals(epsilon) || tsym.checkTerminale()) && !rhs.contains(tsym)){
-						rhs.add(tsym);
-					}
-				}
-			}
-		}
-		return rhs;
-    }
-    
     public void calcFollow() {
         follow = new HashMap<>();
 
