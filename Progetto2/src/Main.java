@@ -168,8 +168,8 @@ public class Main {
 	                    	gf.stampaFile(g);
 	                    	ParserLL ll1=new ParserLL(g);
 	                    	ll1.isLL1(g.getRules());
-	                    	//System.out.println("L'insieme dei first e': "+ll1.getFirst());
-	                    	//System.out.println("L'insieme dei follow e': "+ll1.getFollow());
+	                    	System.out.println("L'insieme dei first e': "+ll1.getFirst());
+	                    	System.out.println("L'insieme dei follow e': "+ll1.getFollow());
 	                    	System.out.println("L'insieme dei predict e': "+ll1.getPredict());
 	                        break;
 	                    case 0:
