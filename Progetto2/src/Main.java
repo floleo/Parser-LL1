@@ -159,8 +159,9 @@ public class Main {
 
 	                    	System.out.println("Grammatica inserita con successo!");
 	                    	System.out.println("Inserire il nome del file su cui salvare la grammatica(inclusa l'estensione, es. prova.txt): ");
-	                    	gf=new GestoreFile(br.read()+".txt");
-	                    	gf2=new GestoreFile(br.readLine());
+	                    	String f = br.readLine();
+	                    	gf=new GestoreFile(f+".txt");
+	                    	gf2=new GestoreFile(f);
 	                    	gf.scriviFile(g);
 	                    	gf2.scriviAltroFile(g);
 	                    	System.out.println("Inserimento su file completato con successo!");
