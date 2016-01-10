@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -16,6 +15,8 @@ public class Main {
 	        GestoreFile gf;
 	        GestoreFile gf2;
 	        GestoreFile gf3;
+	        GestoreFileEsterni gfe;
+	        GestoreFileEsterni gfe2;
 	        BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
 	        
 	        try{
@@ -27,21 +28,41 @@ public class Main {
 	                sc = Integer.parseInt(br.readLine());
 	                switch(sc){
 	                    case 1:
-	                    	LinkedList<String> list=new LinkedList<>();
-	                    	gf3=new GestoreFile(list);
+	                    	LinkedList<String> list = new LinkedList<>();
+	                    	gf3 = new GestoreFile(list);
+	                    	gfe = new GestoreFileEsterni(list);
 	                        String uf;
 	                    	int u;
+	                    	String risp;
+	                    	do{
+	                    		System.out.println("Vuoi leggere da un file esterno? (s/n)");
+	                    		risp = br.readLine();
+	                    		if(!risp.equals("s") && !risp.equals("n")) System.out.println("Devi inserire i caratteri s/n!");
+	                    	}while(!risp.equals("s") && !risp.equals("n"));
 	                    	do{
 	                    		System.out.println("Seleziona il file da cui leggere la grammatica (digitare l'indice): ");
-	                    		list = gf3.visualizzaFile();
-	                    		gf3.stampaFile(list);
+	                    		if(risp.equals("s")){
+	                    			list = gfe.visualizzaFileEsterno();
+	                    			gfe.stampaFile(list);
+	                    		}
+	                    		else{
+	                    			list = gf3.visualizzaFile();
+		                    		gf3.stampaFile(list);
+	                    		}
 	                    		u = Integer.parseInt(br.readLine());
 	                    		if(u>=list.size()) System.out.println("Numero non valido");
 	                    	}while(u>=list.size());
 	                        uf=list.get(u);
-	                    	gf2=new GestoreFile(uf);
-	                    	Grammatica gr = gf2.leggiFile();
-	                    	gf2.stampaFile(gr);
+	                        Grammatica gr;
+	                    	if(risp.equals("s")){
+	                        	gfe2 = new GestoreFileEsterni(uf);
+	                        	gr = gfe2.leggiFileEsterno();
+	                        	gfe2.stampaFile(gr);
+	                        } else{
+	                        	gf2=new GestoreFile(uf);
+	                        	gr = gf2.leggiFile();
+		                    	gf2.stampaFile(gr);
+		                    }
 	                    	int sc1 = 0;
 	                    	do{
 	        	                System.out.println("1->Verifica se la grammatica selezionata è context-free \n"
