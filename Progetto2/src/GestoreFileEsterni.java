@@ -119,10 +119,9 @@ public class GestoreFileEsterni {
             			str = String.valueOf(in.charAt(0));
                 		lhs = new NonTerminale(str);
                 		g.getLhss().add(lhs);
-    					if(!String.valueOf(in.charAt(1)).equals("-")){
-        					System.out.println("La grammatica selezionata non è context-free!");
+    					if(!String.valueOf(in.charAt(1)).equals("-"))
         					g.setIsContextFree(false);
-        				} else{
+        				else{
         					rhs = new LinkedList<Simbolo>();
     						for(int j = 3; j<in.length();j++){
         						str = String.valueOf(in.charAt(j));
