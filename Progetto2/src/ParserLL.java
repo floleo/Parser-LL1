@@ -8,9 +8,6 @@ public class ParserLL {
 
     public ParserLL(Grammatica grammatica) {
         this.grammatica = grammatica;
-        calcFirst();
-        calcFollow();
-        calcPredict();
     }
 
     public void calcFirst() {
@@ -34,22 +31,16 @@ public class ParserLL {
             diff = false;
 
             for (Produzione r : grammatica.getRules()) {
-                List<Simbolo> beta = r.getRHS();
-
+            	List<Simbolo> beta = r.getRHS();
                 Set<Terminale> rhs = new HashSet<>(first.get(beta.get(0)));
-                //rhs.remove(Simbolo.EPSILON);
-
                 int i = 0;
                 while (i < beta.size() - 1 && first.get(beta.get(i)).contains(Simbolo.EPSILON)) {
                     rhs.addAll(first.get(beta.get(i + 1)));
-                    //rhs.remove(Simbolo.EPSILON);
                     i++;
                 }
-
                 if (i == beta.size() - 1 && first.get(beta.get(i)).contains(Simbolo.EPSILON)) {
                     rhs.add(Simbolo.EPSILON);
                 }
-
                 int oldLength = first.get(r.getLHS()).size();
                 first.get(r.getLHS()).addAll(rhs);
                 diff = diff || oldLength < first.get(r.getLHS()).size();
@@ -59,7 +50,6 @@ public class ParserLL {
 
     public void calcFollow() {
         follow = new HashMap<>();
-
         for (NonTerminale t : grammatica.getNonTerminals()) {
             follow.put(t, new HashSet<>());
         }
@@ -144,35 +134,31 @@ public class ParserLL {
     }
 
  
-    public void isLL1(List<Produzione> produzioni) {
+    public boolean isLL1(List<Produzione> produzioni) {
     	ListIterator<Produzione> it = produzioni.listIterator();
     	ListIterator<Produzione> it2 = produzioni.listIterator();
     	Produzione p;
     	Produzione p2;
-    	boolean b = true, c = false;
     	while(it.hasNext()){
     		p = it.next();
     		while(it2.hasNext()){
     			p2 = it2.next();
     			if(p.getLHS().equals(p2.getLHS()) && (!p.getRHS().equals(p2.getRHS()))){
     				if(p.getRHS().get(0).equals(p2.getRHS().get(0))){
-    					c = true;
-    					b = false;
+    					System.out.println("Sono presenti prefissi comuni --> No LL(1)");
+    					return false;
     				}
     			}
     		}
     		if(p.getLHS().equals(p.getRHS().get(0))){
     			System.out.println("E' presente una ricorsione sinistra --> No LL(1)");
-				b = false;
+				return false;
     		}
     		do{
     			it2.previous();
     		}while(it2.hasPrevious());
     	}
-    	if(c) System.out.println("Sono presenti prefissi comuni --> No LL(1)");
-    	//if(b) System.out.println("La grammatica è LL(1)");
-    	//else System.out.println("La grammatica non è LL(1)");
-        
+    	return true;
     }
     
     public boolean LL1(){

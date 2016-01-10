@@ -54,12 +54,17 @@ public class Main {
 	    	                break;
 	    	                    case 2:
 	    	                    	ParserLL ll=new ParserLL(gr);
-	    	                    	ll.isLL1(gr.getRules());
-	    	                    	System.out.println("L'insieme dei first e': "+ll.getFirst());
-	    	                    	System.out.println("L'insieme dei follow e': "+ll.getFollow());
-	    	                    	System.out.println("L'insieme dei predict e': "+ll.getPredict());
-	    	                    	if(ll.LL1()) System.out.println("La grammatica è LL(1)");
-	    	                    	else System.out.println("La grammatica non è LL(1)");
+	    	                    	boolean x = ll.isLL1(gr.getRules());
+	    	                    	if(x){
+	    	                    		ll.calcFirst();
+	    	                    		System.out.println("L'insieme dei first e': " + ll.getFirst());
+	    	                    		ll.calcFollow();
+	    	                    		System.out.println("L'insieme dei follow e': " + ll.getFollow());
+	    	                    		ll.calcPredict();
+	    	                    		System.out.println("L'insieme dei predict e': " + ll.getPredict());
+	    	                    		if(ll.LL1()) System.out.println("La grammatica è LL(1)");
+	    	                    			else System.out.println("La grammatica non è LL(1)");
+	    	                    	}
 	    	                        break;
 	    	                    case 0:
 	    	                        break;
@@ -188,12 +193,17 @@ public class Main {
 	                    	System.out.println("Inserimento su file completato con successo!");
 	                    	gf.stampaFile(g);
 	                    	ParserLL ll1=new ParserLL(g);
-	                    	ll1.isLL1(g.getRules());
-	                    	System.out.println("L'insieme dei first e': "+ll1.getFirst());
-	                    	System.out.println("L'insieme dei follow e': "+ll1.getFollow());
-	                    	System.out.println("L'insieme dei predict e': "+ll1.getPredict());
-	                    	if(ll1.LL1()) System.out.println("La grammatica è LL(1)");
-	                    	else System.out.println("La grammatica non è LL(1)");
+	                    	boolean z = ll1.isLL1(g.getRules());
+	                    	if(z){
+	                    		ll1.calcFirst();
+	                    		System.out.println("L'insieme dei first e': "+ll1.getFirst());
+	                    		ll1.calcFollow();
+	                    		System.out.println("L'insieme dei follow e': "+ll1.getFollow());
+	                    		ll1.calcPredict();
+	                    		System.out.println("L'insieme dei predict e': "+ll1.getPredict());
+	                    		if(ll1.LL1()) System.out.println("La grammatica è LL(1)");
+	                    		else System.out.println("La grammatica non è LL(1)");
+	                    	}
 	                        break;
 	                    case 0:
 	                        System.out.println("Programma terminato");
