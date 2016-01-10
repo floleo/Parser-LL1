@@ -121,7 +121,7 @@ public class GestoreFileEsterni {
                 		g.getLhss().add(lhs);
     					if(!String.valueOf(in.charAt(1)).equals("-")){
         					System.out.println("La grammatica selezionata non è context-free!");
-        					break;
+        					g.setIsContextFree(false);
         				} else{
         					rhs = new LinkedList<Simbolo>();
     						for(int j = 3; j<in.length();j++){

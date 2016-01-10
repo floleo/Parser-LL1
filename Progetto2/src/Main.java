@@ -71,8 +71,10 @@ public class Main {
 	                    	sc1 = Integer.parseInt(br.readLine());
 	    	                switch(sc1){
 	    	                    case 1:
-	    	                    	
-	    	                break;
+	    	                    	if(gr.getIsContextFree())
+	    	                    		System.out.println("La grammatica è context-free!!!");
+	    	                    	else System.out.println("La grammatica non è context-free!!!");
+	    	                    	break;
 	    	                    case 2:
 	    	                    	ParserLL ll=new ParserLL(gr);
 	    	                    	boolean x = ll.isLL1(gr.getRules());
@@ -118,7 +120,7 @@ public class Main {
 	                    	LinkedList<NonTerminale> nonTerminals = new LinkedList<>();
 	                    	NonTerminale nt;
 	                    	int nonTerm = 0;
-	                    	System.out.println("Inserire il numero di non terminali della grammatica:");
+	                    	System.out.println("Inserire il numero di non terminali della grammatica (escluso lo start symbol):");
 	                    	nonTerm = Integer.parseInt(br.readLine());
 	                    	for(j=0; j<nonTerm;j++){
 	                    		String s;

@@ -1,4 +1,0 @@
-[a, b, c, d]
-[A, B, C, S]
-S
-[S->[A, B, C], A->[a, b, d, d], A->[C, d, d], B->[c, a, a], C->[d, b, b, b]]
