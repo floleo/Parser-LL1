@@ -8,5 +8,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/user/Documents/antlr-4.4-complete.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Documents/GitHub/Parser-LL1/batik-1.8/batik-1.8.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

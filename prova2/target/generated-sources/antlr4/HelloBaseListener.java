@@ -16,13 +16,13 @@ public class HelloBaseListener implements HelloListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterR(@NotNull HelloParser.RContext ctx) { }
+	@Override public void enterS(@NotNull HelloParser.SContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitR(@NotNull HelloParser.RContext ctx) { }
+	@Override public void exitS(@NotNull HelloParser.SContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
