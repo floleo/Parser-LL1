@@ -90,31 +90,28 @@ public class ParserLL {
         for (Produzione r : grammatica.getRules()) {
             Set<Terminale> pr = new HashSet<>(first.get(r.getRHS().get(0)));
             Set<Terminale> pr2;
-
+            int i=0;
             predict.put(r, pr);
             if (pr.contains(Simbolo.EPSILON)) {
             	pr.remove(Simbolo.EPSILON);
-            	if(r.getRHS().size()==1){	
+            	while (i < r.getRHS().size() ) {
+            		if(r.getRHS().size()==1 || i==r.getRHS().size()-1){	
+                		predict.get(r).addAll(follow.get(r.getLHS()));
+                	}else{
+                		pr2=first.get(r.getRHS().get(i + 1));
+                		pr2.remove(Simbolo.EPSILON);
+                		predict.get(r).addAll(pr2);
+                	}
+                    i++;
+                }
+            	/*if(r.getRHS().size()==1 ){	
             		predict.get(r).addAll(follow.get(r.getLHS()));
             	}else{
             		pr2=first.get(r.getLHS());
             		pr2.remove(Simbolo.EPSILON);
             		predict.get(r).addAll(pr2);
-            	}
+            	}*/
             }
-            
-            /*if (pr.contains(Simbolo.EPSILON)) {
-        	pr.remove(Simbolo.EPSILON);          	
-        	for(Simbolo s : r.getRHS()){
-        		if(s==Simbolo.EPSILON && r.getRHS().size()==1){
-        			predict.get(r).addAll(follow.get(r.getLHS()));
-        		}else if(s==Simbolo.EPSILON && r.getRHS().size()>1){
-        			pr2=first.get(r.getLHS());
-        			pr2.remove(Simbolo.EPSILON);
-        			predict.get(r).addAll(pr2);        				
-       			}
-       		}
-       	}*/
         }
     }
 
