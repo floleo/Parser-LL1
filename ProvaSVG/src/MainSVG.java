@@ -17,8 +17,11 @@ import org.w3c.dom.DOMImplementation;
 public class MainSVG {
 
   public void paint(Graphics2D g2d) {
-    g2d.setPaint(Color.red);
+	  
+	g2d.setPaint(Color.red);
     g2d.fill(new Rectangle(10, 10, 100, 100));
+    g2d.drawLine(10, 10, 150, 150);
+	g2d.drawLine(10, 100, 100, 10);  
   }
 
   public static void main(String[] args) throws IOException {
@@ -40,7 +43,7 @@ public class MainSVG {
     // Finally, stream out SVG to the standard output using
     // UTF-8 encoding.
     boolean useCSS = true; // we want to use CSS style attributes
-    File f = new File("svgFile.svg");
+    File f = new File("svgFile3.svg");
     OutputStream outputStream = new FileOutputStream(f);
     Writer out = new OutputStreamWriter(outputStream, "UTF-8");
     svgGenerator.stream(out, useCSS);  
