@@ -7,6 +7,8 @@ import java.io.OutputStream;
 import java.io.Writer;
 import java.io.OutputStreamWriter;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.batik.dom.GenericDOMImplementation;
@@ -18,10 +20,28 @@ public class MainSVG {
 
   public void paint(Graphics2D g2d) {
 	  
-	g2d.setPaint(Color.red);
-    g2d.fill(new Rectangle(10, 10, 100, 100));
-    g2d.drawLine(10, 10, 150, 150);
-	g2d.drawLine(10, 100, 100, 10);  
+	g2d.setPaint(Color.black);
+	int i = 0, x = 0, y = 0, w = 25, h = 0;
+	List<Integer> l = new LinkedList<>();
+	for(int j=0;j<101;j++)
+		l.add(j);
+	for(i = 0; i<101; i++){
+		g2d.setColor(Color.BLACK);
+	    g2d.drawLine(0, x, 325, x);
+	    g2d.drawLine(0, 0, 0, 100);
+	    g2d.drawLine(w, 0, w, 100);
+	    g2d.drawString(String.valueOf(l.get(i))+"->"+"rhs", 30, y);
+	    g2d.drawString(String.valueOf(l.get(i)), 3, y);
+	    g2d.setColor(Color.BLACK);
+		//g2d.drawString("D", w, h);
+		i+=19;
+		x+=20;
+		y+=20;
+		w+=60;
+		//h+=10;
+		
+	}
+    //g2d.fill(new Rectangle(10, 10, 100, 100));
   }
 
   public static void main(String[] args) throws IOException {
@@ -43,7 +63,7 @@ public class MainSVG {
     // Finally, stream out SVG to the standard output using
     // UTF-8 encoding.
     boolean useCSS = true; // we want to use CSS style attributes
-    File f = new File("svgFile3.svg");
+    File f = new File("svgFile.svg");
     OutputStream outputStream = new FileOutputStream(f);
     Writer out = new OutputStreamWriter(outputStream, "UTF-8");
     svgGenerator.stream(out, useCSS);  
