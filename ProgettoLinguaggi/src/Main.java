@@ -101,21 +101,12 @@ public class Main {
 	    	                    	}
 	    	                        break;
 	    	                    case 3:
-	    	                    	 // Get a DOMImplementation.
-	    	                        DOMImplementation domImpl = GenericDOMImplementation.getDOMImplementation();
-
-	    	                        // Create an instance of org.w3c.dom.Document.
+	    	                    	DOMImplementation domImpl = GenericDOMImplementation.getDOMImplementation();
 	    	                        String svgNS = "http://www.w3.org/TR/SVG11/";
 	    	                        Document document = domImpl.createDocument(svgNS, "svg", null);
-	    	                        
-	    	                        // Create an instance of the SVG Generator.
 	    	                        SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
-	    	                        // Ask the test to render into the SVG Graphics2D implementation.
-	    	                        CreaTabella test = new CreaTabella();
-	    	                        test.paint(svgGenerator);
-
-	    	                        // Finally, stream out SVG to the standard output using
-	    	                        // UTF-8 encoding.
+	    	                        CreaTabella table = new CreaTabella();
+	    	                        table.paint(svgGenerator,gr);
 	    	                        boolean useCSS = true; // we want to use CSS style attributes
 	    	                        File f;
 	    	                        if(risp.equals("s")){
