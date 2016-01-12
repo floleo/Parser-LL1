@@ -1,10 +1,20 @@
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+
+import org.apache.batik.dom.GenericDOMImplementation;
+import org.apache.batik.svggen.SVGGraphics2D;
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
 
 
 public class Main {
@@ -67,6 +77,7 @@ public class Main {
 	                    	do{
 	        	                System.out.println("1->Verifica se la grammatica selezionata è context-free \n"
 	        	                        + "2->Verifica se la grammatica selezionata è LL(1) \n"
+	        	                        + "3->Genera la tabella di parsing LL(1) \n"
 	        	                        + "0-->Indietro");
 	                    	sc1 = Integer.parseInt(br.readLine());
 	    	                switch(sc1){
@@ -79,16 +90,44 @@ public class Main {
 	    	                    	ParserLL ll=new ParserLL(gr);
 	    	                    	boolean x = ll.isLL1(gr.getRules());
 	    	                    	if(x){
+	    	                    		if(ll.LL1()) System.out.println("La grammatica è LL(1)");
+    	                    				else System.out.println("La grammatica non è LL(1)");
 	    	                    		ll.calcFirst();
 	    	                    		System.out.println("L'insieme dei first e': " + ll.getFirst());
 	    	                    		ll.calcFollow();
 	    	                    		System.out.println("L'insieme dei follow e': " + ll.getFollow());
 	    	                    		ll.calcPredict();
 	    	                    		System.out.println("L'insieme dei predict e': " + ll.getPredict());
-	    	                    		if(ll.LL1()) System.out.println("La grammatica è LL(1)");
-	    	                    			else System.out.println("La grammatica non è LL(1)");
 	    	                    	}
 	    	                        break;
+	    	                    case 3:
+	    	                    	 // Get a DOMImplementation.
+	    	                        DOMImplementation domImpl = GenericDOMImplementation.getDOMImplementation();
+
+	    	                        // Create an instance of org.w3c.dom.Document.
+	    	                        String svgNS = "http://www.w3.org/TR/SVG11/";
+	    	                        Document document = domImpl.createDocument(svgNS, "svg", null);
+	    	                        
+	    	                        // Create an instance of the SVG Generator.
+	    	                        SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
+	    	                        // Ask the test to render into the SVG Graphics2D implementation.
+	    	                        CreaTabella test = new CreaTabella();
+	    	                        test.paint(svgGenerator);
+
+	    	                        // Finally, stream out SVG to the standard output using
+	    	                        // UTF-8 encoding.
+	    	                        boolean useCSS = true; // we want to use CSS style attributes
+	    	                        File f;
+	    	                        if(risp.equals("s")){
+	    	                        	f = new File("src\\GrammaticheEsterne\\"+uf+".svg");
+	    	                        } else f = new File("src\\Grammatiche\\"+uf+".svg");
+	    	                        OutputStream outputStream = new FileOutputStream(f);
+	    	                        Writer out = new OutputStreamWriter(outputStream, "UTF-8");
+	    	                        svgGenerator.stream(out, useCSS);  
+	    	                        outputStream.flush();
+	    	                        outputStream.close();
+	    	                    	ApriSVG a=new ApriSVG(uf,risp);
+	    	                    	break;
 	    	                    case 0:
 	    	                        break;
 	    	                    default:
