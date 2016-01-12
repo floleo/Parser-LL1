@@ -91,7 +91,7 @@ public class Main {
 	    	                    	boolean x = ll.isLL1(gr.getRules());
 	    	                    	if(x){
 	    	                    		if(ll.LL1()) System.out.println("La grammatica è LL(1)");
-    	                    				else System.out.println("La grammatica non è LL(1)");
+    	                    			else System.out.println("La grammatica non è LL(1)");
 	    	                    		ll.calcFirst();
 	    	                    		System.out.println("L'insieme dei first e': " + ll.getFirst());
 	    	                    		ll.calcFollow();
@@ -254,8 +254,23 @@ public class Main {
 	                    		System.out.println("L'insieme dei follow e': "+ll1.getFollow());
 	                    		ll1.calcPredict();
 	                    		System.out.println("L'insieme dei predict e': "+ll1.getPredict());
-	                    		if(ll1.LL1()) System.out.println("La grammatica è LL(1)");
-	                    		else System.out.println("La grammatica non è LL(1)");
+	                    		if(ll1.LL1()) {
+	                    			System.out.println("La grammatica è LL(1)");
+	                    			DOMImplementation domImpl = GenericDOMImplementation.getDOMImplementation();
+	    	                        String svgNS = "http://www.w3.org/TR/SVG11/";
+	    	                        Document document = domImpl.createDocument(svgNS, "svg", null);
+	    	                        SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
+	    	                        CreaTabella table = new CreaTabella();
+	    	                        table.paint(svgGenerator,g);
+	    	                        boolean useCSS = true;
+	    	                        File f2 = new File("src\\Grammatiche\\"+f+".svg");
+	    	                        OutputStream outputStream = new FileOutputStream(f2);
+	    	                        Writer out = new OutputStreamWriter(outputStream, "UTF-8");
+	    	                        svgGenerator.stream(out, useCSS);  
+	    	                        outputStream.flush();
+	    	                        outputStream.close();
+	    	                    	ApriSVG a=new ApriSVG(f,null);
+	                    		}else System.out.println("La grammatica non è LL(1)");
 	                    	}
 	                        break;
 	                    case 0:

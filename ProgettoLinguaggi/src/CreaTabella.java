@@ -10,11 +10,13 @@ import java.util.Set;
 
 
 public class CreaTabella {
+	
 	public void paint(Graphics2D g2d, Grammatica g) {
 	  	  
     	g2d.setPaint(Color.black);
     	int x = 30, y = 55, w = 30;
     	List<NonTerminale> nt = g.getNonTerminals();
+    	Set<NonTerminale> snt = new HashSet<>();
     	List<Terminale> t = g.getTerminals();
     	Set<Terminale> st = new HashSet<>();
         List<Produzione> pr = g.getRules();
@@ -32,9 +34,11 @@ public class CreaTabella {
     	}
     	g2d.drawLine(0, 0, 0, 30*(pr.size()+1)+40);
     	g2d.drawLine(30+100*(t.size()), 0, 30+100*(t.size()), 30*(pr.size()+1)+40);
-	    
+    	
+    	
     	//linee righe
     	for(int i = 0; i<pr.size(); i++){
+    		
     		g2d.setColor(Color.BLACK);
     	    g2d.drawLine(0, x, 30+100*(t.size()), x);
     	    g2d.drawString(pr.get(i).getLHS().getName()+"->"+pr.get(i).getRHS(), 40, y);
