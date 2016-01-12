@@ -1,0 +1,4 @@
+[i, +, *, (, )]
+[T, F, G, H, E]
+E
+[E->[T, G], G->[+, T, G], G->[epsilon], T->[F, H], H->[*, F, H], H->[epsilon], F->[i], F->[(, E, )]]

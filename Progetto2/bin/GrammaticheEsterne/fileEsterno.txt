@@ -1,0 +1,7 @@
+abcde
+ABC
+S
+S->AB
+A->abC
+B->bde
+C->cc
