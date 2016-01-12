@@ -18,7 +18,6 @@ public class GestoreFileEsterni {
 	public GestoreFileEsterni(String name) throws IOException{
 		this.nameFile=name;
 		f=new File("src\\GrammaticheEsterne\\"+name);
-		//f.createNewFile();
 	}
 	
 	public GestoreFileEsterni(LinkedList<String> lis){
@@ -141,7 +140,6 @@ public class GestoreFileEsterni {
         		}                
             br.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return g;

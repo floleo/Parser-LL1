@@ -104,13 +104,6 @@ public class ParserLL {
                 	}
                     i++;
                 }
-            	/*if(r.getRHS().size()==1 ){	
-            		predict.get(r).addAll(follow.get(r.getLHS()));
-            	}else{
-            		pr2=first.get(r.getLHS());
-            		pr2.remove(Simbolo.EPSILON);
-            		predict.get(r).addAll(pr2);
-            	}*/
             }
         }
     }

@@ -23,25 +23,17 @@
       ><line y2="190" style="fill:none;" x1="0" x2="0" y1="0"
       /><line y2="190" style="fill:none;" x1="530" x2="530" y1="0"
       /><line y2="30" style="fill:none;" x1="0" x2="530" y1="30"
-      /><text x="40" xml:space="preserve" y="55" style="stroke:none;"
-      >S-&gt;[A, B]</text
-      ><text x="10" xml:space="preserve" y="55" style="stroke:none;"
-      >S</text
-      ><line y2="70" style="fill:none;" x1="0" x2="530" y1="70"
-      /><text x="40" xml:space="preserve" y="95" style="stroke:none;"
-      >A-&gt;[a, b, C]</text
-      ><text x="10" xml:space="preserve" y="95" style="stroke:none;"
+      /><text x="10" xml:space="preserve" y="55" style="stroke:none;"
       >A</text
-      ><line y2="110" style="fill:none;" x1="0" x2="530" y1="110"
-      /><text x="40" xml:space="preserve" y="135" style="stroke:none;"
-      >B-&gt;[b, d, e]</text
-      ><text x="10" xml:space="preserve" y="135" style="stroke:none;"
+      ><line y2="70" style="fill:none;" x1="0" x2="530" y1="70"
+      /><text x="10" xml:space="preserve" y="95" style="stroke:none;"
       >B</text
-      ><line y2="150" style="fill:none;" x1="0" x2="530" y1="150"
-      /><text x="40" xml:space="preserve" y="175" style="stroke:none;"
-      >C-&gt;[c, c]</text
-      ><text x="10" xml:space="preserve" y="175" style="stroke:none;"
+      ><line y2="110" style="fill:none;" x1="0" x2="530" y1="110"
+      /><text x="10" xml:space="preserve" y="135" style="stroke:none;"
       >C</text
+      ><line y2="150" style="fill:none;" x1="0" x2="530" y1="150"
+      /><text x="10" xml:space="preserve" y="175" style="stroke:none;"
+      >S</text
       ><line y2="0" style="fill:none;" x1="0" x2="530" y1="0"
       /><line y2="190" style="fill:none;" x1="0" x2="530" y1="190"
     /></g

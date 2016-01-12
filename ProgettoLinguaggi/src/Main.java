@@ -107,7 +107,7 @@ public class Main {
 	    	                        SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
 	    	                        CreaTabella table = new CreaTabella();
 	    	                        table.paint(svgGenerator,gr);
-	    	                        boolean useCSS = true; // we want to use CSS style attributes
+	    	                        boolean useCSS = true;
 	    	                        File f;
 	    	                        if(risp.equals("s")){
 	    	                        	f = new File("src\\GrammaticheEsterne\\"+uf+".svg");
@@ -117,7 +117,7 @@ public class Main {
 	    	                        svgGenerator.stream(out, useCSS);  
 	    	                        outputStream.flush();
 	    	                        outputStream.close();
-	    	                    	ApriSVG a=new ApriSVG(uf,risp);
+	    	                    	new ApriSVG(uf,risp);
 	    	                    	break;
 	    	                    case 0:
 	    	                        break;
@@ -269,7 +269,7 @@ public class Main {
 	    	                        svgGenerator.stream(out, useCSS);  
 	    	                        outputStream.flush();
 	    	                        outputStream.close();
-	    	                    	ApriSVG a=new ApriSVG(f,null);
+	    	                    	new ApriSVG(f,null);
 	                    		}else System.out.println("La grammatica non è LL(1)");
 	                    	}
 	                        break;

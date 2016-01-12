@@ -18,7 +18,6 @@ public class GestoreFile {
 	public GestoreFile(String name) throws IOException{
 		this.nameFile=name;
 		f=new File("src\\Grammatiche\\"+name);
-		//f.createNewFile();
 	}
 	
 	public GestoreFile(LinkedList<String> lis){
@@ -94,7 +93,7 @@ public class GestoreFile {
         }else{
             for(int i=0;i<files.length;i++){
                 String st = files[i].getName();
-                if(!files[i].getName().endsWith("txt")){
+                if(!files[i].getName().endsWith("txt") && !files[i].getName().endsWith("svg")){
                     ll.add(st);
                 }
             }
