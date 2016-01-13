@@ -1,7 +1,0 @@
-abcde
-ABC
-S
-S->AB
-A->abC
-B->Bde
-C->cc

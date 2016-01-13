@@ -7,10 +7,10 @@
   ><g
     ><line y2="190" style="fill:none;" x1="30" x2="30" y1="0"
       /><text x="75" xml:space="preserve" y="15" style="stroke:none;"
-      >a</text
+      >acca</text
       ><line y2="190" style="fill:none;" x1="130" x2="130" y1="0"
       /><text x="175" xml:space="preserve" y="15" style="stroke:none;"
-      >b</text
+      >id</text
       ><line y2="190" style="fill:none;" x1="230" x2="230" y1="0"
       /><text x="275" xml:space="preserve" y="15" style="stroke:none;"
       >c</text
@@ -42,9 +42,9 @@
       /><text x="40" xml:space="preserve" y="55" style="stroke:none;"
       >S-&gt;[A, B]</text
       ><text x="40" xml:space="preserve" y="95" style="stroke:none;"
-      >A-&gt;[a, b, C]</text
+      >A-&gt;[acca, id, C]</text
       ><text x="140" xml:space="preserve" y="135" style="stroke:none;"
-      >B-&gt;[b, d, e]</text
+      >B-&gt;[id, d, e]</text
       ><text x="240" xml:space="preserve" y="175" style="stroke:none;"
       >C-&gt;[c, c]</text
     ></g

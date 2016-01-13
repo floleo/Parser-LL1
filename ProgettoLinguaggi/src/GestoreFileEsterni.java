@@ -91,20 +91,31 @@ public class GestoreFileEsterni {
 
 	public Grammatica leggiFileEsterno(){
 		String in;
-		String str = null;
+		String str = "";
         Grammatica g = new Grammatica();
+        boolean context = true;
+        Grammatica gr = null;
         try {
             BufferedReader br= new BufferedReader(new FileReader (f));
             
             in = br.readLine();
             for(int index = 0; index<in.length();index++){
-            	str = String.valueOf(in.charAt(index));
+            	String str1 = null;
+            	str = "";
+            	do{
+        			str1 = String.valueOf(in.charAt(index));
+            		if(!(str1.equals(",")) && (!(str1.equals(";")))){
+            			str = str.concat(str1);
+            			index++;
+            		}
+            	}while(!(str1.equals(",")) && !(str1.equals(";")));
             	Terminale t = new Terminale(str);
                 g.getTerminals().add(t);
             }
             in = br.readLine();
             for(int j = 0; j<in.length();j++){
             	str = String.valueOf(in.charAt(j));
+            	j++;
             	NonTerminale nt = new NonTerminale(str);
                 g.getNonTerminals().add(nt);
             }
@@ -118,16 +129,27 @@ public class GestoreFileEsterni {
             			str = String.valueOf(in.charAt(0));
                 		lhs = new NonTerminale(str);
                 		g.getLhss().add(lhs);
-    					if(!String.valueOf(in.charAt(1)).equals("-"))
-        					g.setIsContextFree(false);
-        				else{
+    					if(!String.valueOf(in.charAt(1)).equals("-")){
+        					context = false;
+        					System.out.println("ERRORE: GRAMMATICA NON CONTESTUALE");
+        					System.out.println("Interruzione della lettura del file selezionato");
+        					break;
+    					} else{
         					rhs = new LinkedList<Simbolo>();
     						for(int j = 3; j<in.length();j++){
-        						str = String.valueOf(in.charAt(j));
+    							str = String.valueOf(in.charAt(j));
+        						String str2 = "";
+    			            	do{
+    			        			str = String.valueOf(in.charAt(j));
+    			            		if(!(str.equals(",")) && (!(str.equals(";")))){
+    			            			str2 = str2.concat(str);
+    			            			j++;
+    			            		}
+    			            	}while(!(str.equals(",")) && !(str.equals(";")));
         						NonTerminale ntsym;
         						Terminale tsym;
-        						ntsym = new NonTerminale(str);
-        						tsym = new Terminale(str);
+        						ntsym = new NonTerminale(str2);
+        						tsym = new Terminale(str2);
         						if(g.getNonTerminals().contains(ntsym)){
         							rhs.add(ntsym);
         						} else if(g.getTerminals().contains(tsym)){
@@ -138,10 +160,12 @@ public class GestoreFileEsterni {
         					g.getRules().add(p);
         				}
         		}                
+        	gr = new Grammatica(st, g.getRules(), g.getLhss(), g.getNonTerminals(), g.getTerminals());
+        	gr.setIsContextFree(context);
             br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return g;
+        return gr;
 	}
 }

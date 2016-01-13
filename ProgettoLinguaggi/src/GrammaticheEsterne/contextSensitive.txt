@@ -1,7 +1,7 @@
-abcde
-ABC
+a,b,c,d,e;
+A,B,C:
 S
-S->AB
-A->abC
-BB->bde
-C->cc
+S->A,B;
+A->a,b,C;
+B,B->b,d,e;
+C->c,c;

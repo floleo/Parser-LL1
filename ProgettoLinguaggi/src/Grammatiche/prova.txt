@@ -1,4 +1,0 @@
-[a, b]
-[A, S]
-S
-[S->[A], A->[a, A, b], A->[epsilon]]
