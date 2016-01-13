@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,6 +28,17 @@ public class CreaTabella {
         Iterator<Produzione> it = set.iterator();
         Iterator<Produzione> it2 = pr.listIterator();
         Iterator<Produzione> it3 = pr.listIterator();
+        t.add(Simbolo.EOF);
+        
+        /*Collection<Set<Terminale>> s;
+        
+        //come prendere solo i valori dei predict?
+        for(Produzione r: pr){
+        	for(Produzione r2: pr){
+        		predict.get(r).addAll(predict.get(r2));
+        		s=predict.values();
+        	}
+        }*/
         
         //linee colonne
     	for(int k=0;k<t.size();k++){
@@ -45,7 +57,7 @@ public class CreaTabella {
     		
     		g2d.setColor(Color.BLACK);
     	    g2d.drawLine(0, x, 30+100*(t.size()), x);
-    	    g2d.drawString(nt.get(i).getName()+"->"+pr.get(i).getRHS(), 40, y);
+    	    //g2d.drawString(nt.get(i).getName()+"->"+pr.get(i).getRHS(), 40, y);
     	    g2d.drawString(nt.get(i).getName(), 10, y);
     		x+=40;
     		y+=40;
