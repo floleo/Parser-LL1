@@ -98,11 +98,11 @@ public class Main {
 	    	                    	ll.calcPredict();
     	                    		boolean x = ll.isLL1(gr.getRules());
 	    	                    	if(x){
-	    	                    		if(ll.LL1()) System.out.println("La grammatica è LL(1)");
-    	                    			else System.out.println("La grammatica non è LL(1)");
 	    	                    		System.out.println("L'insieme dei first e': " + ll.getFirst());
 	    	                    		System.out.println("L'insieme dei follow e': " + ll.getFollow());
 	    	                    		System.out.println("L'insieme dei predict e': " + ll.getPredict());
+	    	                    		if(ll.LL1()) System.out.println("La grammatica è LL(1)");
+    	                    			else System.out.println("Duplice ingresso nella tabella dei predict! --> La grammatica non è LL(1)");
 	    	                    	}
 	    	                        break;
 	    	                    case 3:
@@ -128,7 +128,7 @@ public class Main {
 	    	                    		outputStream.flush();
 	    	                    		outputStream.close();
 	    	                    		new ApriSVG(uf,risp);
-	    	                    	}else System.out.println("La grammatica non è LL(1)");
+	    	                    	}else System.out.println("Duplice ingresso nella tabella dei predict! --> La grammatica non è LL(1)");
 	    	                    		break;
 	    	                    case 0:
 	    	                        break;
@@ -281,7 +281,7 @@ public class Main {
 	    	                        outputStream.flush();
 	    	                        outputStream.close();
 	    	                    	new ApriSVG(f,"n");
-	                    		}else System.out.println("La grammatica non è LL(1)");
+	                    		}else System.out.println("Duplice ingresso nella tabella dei predict! --> La grammatica non è LL(1)");
 	                    	}
 	                        break;
 	                    case 0:
