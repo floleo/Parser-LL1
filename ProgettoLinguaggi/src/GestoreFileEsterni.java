@@ -131,8 +131,6 @@ public class GestoreFileEsterni {
                 		g.getLhss().add(lhs);
     					if(!String.valueOf(in.charAt(1)).equals("-")){
         					context = false;
-        					System.out.println("ERRORE: GRAMMATICA NON CONTESTUALE");
-        					System.out.println("Interruzione della lettura del file selezionato");
         					break;
     					} else{
         					rhs = new LinkedList<Simbolo>();

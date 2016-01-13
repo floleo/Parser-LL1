@@ -155,10 +155,10 @@ public class ParserLL {
     	for (Produzione r : grammatica.getRules()) {
     		for (Produzione r2 : grammatica.getRules()) {
     			if (r != r2) {
-    				if(r.getLHS()==r2.getLHS()){
+    				if(r.getLHS().equals(r2.getLHS())){
     					Set<Terminale> intersection = new HashSet<>(predict.get(r));
     					intersection.retainAll(predict.get(r2));
-    					if (!intersection.isEmpty()) {
+						if (!intersection.isEmpty()) {
     						return false;
     					}
     				}

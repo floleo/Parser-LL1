@@ -1,16 +1,13 @@
-import java.awt.Rectangle;
 import java.awt.Graphics2D;
 import java.awt.Color;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.io.Serializable;
 import java.io.Writer;
 import java.io.OutputStreamWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +17,6 @@ import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.batik.dom.GenericDOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.DOMImplementation;
-//import org.jfree.graphics2d.svg.SVGGraphics2D;
 
 public class MainSVG {
 
@@ -32,7 +28,6 @@ public class MainSVG {
 	List<Double> f = new LinkedList<>();	//terminali
 	Set<Double> d = new HashSet<>();		//set<terminali>
     Map<Integer, Set<Double>> predict = new HashMap<>();	//predict
-    Iterator it = d.iterator();
 	for(int j=0;j<4;j++){
 		l.add(j);
 		l.add(j*5);
@@ -47,8 +42,6 @@ public class MainSVG {
 	    g2d.drawLine(0, 0, 0, 20*(l.size()+1));
 	    g2d.drawLine(w, 0, w, 20*(l.size()+1));
 	    g2d.drawLine(25+60*(f.size()), 0, 25+60*(f.size()), 20*(l.size()+1));
-	    //if(predict.containsValue(f.get(k)));
-	    //g2d.drawString(String.valueOf(l.get(i))+"->"+"rhs", 30, y);
 	    g2d.drawString(String.valueOf(f.get(k)), 30+w, 10);
 		w+=60;
 	}

@@ -1,0 +1,4 @@
+[a, b, e, i, t]
+[S, R, E]
+S
+[S->[i, E, t, S, R], S->[a], R->[e, S], R->[epsilon], E->[b]]

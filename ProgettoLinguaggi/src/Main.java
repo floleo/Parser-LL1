@@ -67,7 +67,12 @@ public class Main {
 	                    	if(risp.equals("s")){
 	                        	gfe2 = new GestoreFileEsterni(uf);
 	                        	gr = gfe2.leggiFileEsterno();
-	                        	gfe2.stampaFile(gr);
+	                        	if(gr.getIsContextFree()==true){
+	                        		gfe2.stampaFile(gr);
+	                        	}else{
+	                        		System.out.println("GRAMMATICA NON CONTESTUALE: IMPOSSIBILE EFFETTUARE L'ANALISI LL(1)");
+	                        		break;
+	                        	}
 	                        } else{
 	                        	gf2=new GestoreFile(uf);
 	                        	gr = gf2.leggiFile();
@@ -88,21 +93,24 @@ public class Main {
 	    	                    	break;
 	    	                    case 2:
 	    	                    	ParserLL ll=new ParserLL(gr);
-	    	                    	boolean x = ll.isLL1(gr.getRules());
+	    	                    	ll.calcFirst();
+	    	                    	ll.calcFollow();
+	    	                    	ll.calcPredict();
+    	                    		boolean x = ll.isLL1(gr.getRules());
 	    	                    	if(x){
 	    	                    		if(ll.LL1()) System.out.println("La grammatica è LL(1)");
     	                    			else System.out.println("La grammatica non è LL(1)");
-	    	                    		ll.calcFirst();
 	    	                    		System.out.println("L'insieme dei first e': " + ll.getFirst());
-	    	                    		ll.calcFollow();
 	    	                    		System.out.println("L'insieme dei follow e': " + ll.getFollow());
-	    	                    		ll.calcPredict();
 	    	                    		System.out.println("L'insieme dei predict e': " + ll.getPredict());
 	    	                    	}
 	    	                        break;
 	    	                    case 3:
 	    	                    	ll = new ParserLL(gr);
-	    	                    	if(ll.isLL1(gr.getRules())){
+	    	                    	ll.calcFirst();
+	    	                    	ll.calcFollow();
+	    	                    	ll.calcPredict();
+	    	                    	if(ll.LL1()){
 	    	                    		DOMImplementation domImpl = GenericDOMImplementation.getDOMImplementation();
 	    	                    		String svgNS = "http://www.w3.org/TR/SVG11/";
 	    	                    		Document document = domImpl.createDocument(svgNS, "svg", null);
@@ -249,13 +257,13 @@ public class Main {
 	                    	System.out.println("Inserimento su file completato con successo!");
 	                    	gf.stampaFile(g);
 	                    	ParserLL ll1=new ParserLL(g);
-	                    	boolean z = ll1.isLL1(g.getRules());
+	                    	ll1.calcFirst();
+	                    	ll1.calcFollow();
+	                    	ll1.calcPredict();
+                    		boolean z = ll1.isLL1(g.getRules());
 	                    	if(z){
-	                    		ll1.calcFirst();
 	                    		System.out.println("L'insieme dei first e': "+ll1.getFirst());
-	                    		ll1.calcFollow();
 	                    		System.out.println("L'insieme dei follow e': "+ll1.getFollow());
-	                    		ll1.calcPredict();
 	                    		System.out.println("L'insieme dei predict e': "+ll1.getPredict());
 	                    		if(ll1.LL1()) {
 	                    			System.out.println("La grammatica è LL(1)");
