@@ -6,7 +6,7 @@ public class Terminale implements Simbolo, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private final String name;
-	private static String exp_name = "[^A-Z]";
+	private static String exp_name = "[^A-Z]+";
 	public Terminale(String name) {
 		this.name = name;
 	}

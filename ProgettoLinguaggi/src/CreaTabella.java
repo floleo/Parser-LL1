@@ -22,16 +22,6 @@ public class CreaTabella {
         Set<Produzione> set = predict.keySet();
         t.add(Simbolo.EOF);
         
-        /*Collection<Set<Terminale>> s;
-        
-        //come prendere solo i valori dei predict?
-        for(Produzione r: pr){
-        	for(Produzione r2: pr){
-        		predict.get(r).addAll(predict.get(r2));
-        		s=predict.values();
-        	}
-        }*/
-        
         //linee colonne
     	for(int k=0;k<t.size();k++){
     		g2d.setColor(Color.BLACK);
@@ -70,5 +60,6 @@ public class CreaTabella {
     			}
     		}
 		}
+    	t.remove(Simbolo.EOF);
 	}	
 }
