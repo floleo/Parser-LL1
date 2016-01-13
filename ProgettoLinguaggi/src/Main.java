@@ -168,7 +168,7 @@ public class Main {
 	                    	System.out.println("Inserire lo start symbol: ");
 	                    	NonTerminale s = new NonTerminale(br.readLine());
 	                    	if(!nonTerminals.contains(s))
-	                    		nonTerminals.add(s);
+	                    		nonTerminals.addFirst(s);
 	                    	
 	                    	ArrayList<Produzione> regola = new ArrayList<Produzione>();
 	                    	List<NonTerminale> lhss = new LinkedList<NonTerminale>();
@@ -269,7 +269,7 @@ public class Main {
 	    	                        svgGenerator.stream(out, useCSS);  
 	    	                        outputStream.flush();
 	    	                        outputStream.close();
-	    	                    	new ApriSVG(f,null);
+	    	                    	new ApriSVG(f,"n");
 	                    		}else System.out.println("La grammatica non è LL(1)");
 	                    	}
 	                        break;

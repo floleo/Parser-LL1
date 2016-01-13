@@ -20,24 +20,25 @@ public class CreaTabella {
     	g2d.setPaint(Color.black);
     	int x = 30, y = 55, w = 30;
     	List<NonTerminale> nt = g.getNonTerminals();
-    	//Set<NonTerminale> snt = new HashSet<>();
     	List<Terminale> t = g.getTerminals();
-    	//Set<Terminale> st = new HashSet<>();
-        List<Produzione> pr = g.getRules();
-        Map<Produzione, Set<Terminale>> predict = new HashMap<>();
-        predict = ll.getPredict();
-
-    	//linee colonne
+    	List<Produzione> pr = g.getRules();
+        Map<Produzione, Set<Terminale>> predict = ll.getPredict();
+        Set<Produzione> set = predict.keySet();
+        Iterator<Produzione> it = set.iterator();
+        Iterator<Produzione> it2 = pr.listIterator();
+        Iterator<Produzione> it3 = pr.listIterator();
+        
+        //linee colonne
     	for(int k=0;k<t.size();k++){
     		g2d.setColor(Color.BLACK);
-    	    g2d.drawLine(w, 0, w, 30*(pr.size()+1)+40);
+    	    g2d.drawLine(w, 0, w, 30*(pr.size()+1)+30);
     	    //if(predict.containsValue(f.get(k)));
     	    //g2d.drawString(pr.get(k).getLHS().getName()+"->"+pr.get(k).getRHS(), w-20, 45);
     	    g2d.drawString(String.valueOf(t.get(k)), 45+w, 15);
     		w+=100;
     	}
-    	g2d.drawLine(0, 0, 0, 30*(pr.size()+1)+40);
-    	g2d.drawLine(30+100*(t.size()), 0, 30+100*(t.size()), 30*(pr.size()+1)+40);
+    	g2d.drawLine(0, 0, 0, 30*(pr.size()+1)+30);
+    	g2d.drawLine(30+100*(t.size()), 0, 30+100*(t.size()), 30*(pr.size()+1)+30);
     	
     	//linee righe
     	for(int i = 0; i<nt.size(); i++){
@@ -53,18 +54,25 @@ public class CreaTabella {
     	g2d.drawLine(0, x, 30+100*(t.size()), x);
 	    
     	
-    	/*
-    	for(int c = 0; c<pr.size();c++){
+    	//for(int c = 0; c<pr.size();c++){
     		for(int b = 0; b<t.size();b++){
-    			if(predict.get(c).contains(t.get(b)))
-    				y = 55;
-    	    	for(int a = 0; a<nt.size();a++){
-    	    		if(predict.keySet().contains(nt.get(a)))
-    	    			g2d.drawString(nt.get(a).getName()+"->"+pr.get(c).getRHS(), 40+100*t.indexOf(b), y);
-    	    		y+=40;
+    			if(it2.hasNext()){
+    				if(predict.get(it2.next()).contains(t.get(b))){
+    					y = 55;
+    					for(int a = 0; a<nt.size();a++){
+    						if(it.hasNext()){
+    							if(it.next().getLHS().equals(nt.get(a))){
+    								if(it3.hasNext()){
+    									Produzione produ = it3.next();
+    									g2d.drawString(produ.getLHS()+"->"+produ.getRHS(), 40+100*t.indexOf(b), y);
+    								}
+    							}
+    						}
+    						y+=40;
+    					}
+    				}
     			}
-    		}
-    	}
-    	*/
+			}
+    	
 	}	
 }
