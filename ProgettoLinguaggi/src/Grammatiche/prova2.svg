@@ -30,13 +30,11 @@
       /><text x="40" xml:space="preserve" y="135" style="stroke:none;"
       >S-&gt;[A, B]</text
       ><text x="40" xml:space="preserve" y="55" style="stroke:none;"
-      >A-&gt;[a, A, b]</text
-      ><text x="140" xml:space="preserve" y="95" style="stroke:none;"
-      >B-&gt;[b]</text
-      ><text x="140" xml:space="preserve" y="55" style="stroke:none;"
+      >A-&gt;[a, b]</text
+      ><text x="240" xml:space="preserve" y="95" style="stroke:none;"
+      >B-&gt;[epsilon]</text
+      ><text x="240" xml:space="preserve" y="55" style="stroke:none;"
       >A-&gt;[epsilon]</text
-      ><text x="140" xml:space="preserve" y="135" style="stroke:none;"
-      >S-&gt;[A, B]</text
       ><text x="240" xml:space="preserve" y="135" style="stroke:none;"
       >S-&gt;[A, B]</text
     ></g

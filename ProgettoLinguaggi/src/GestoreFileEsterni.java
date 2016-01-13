@@ -109,7 +109,7 @@ public class GestoreFileEsterni {
                 g.getNonTerminals().add(nt);
             }
             NonTerminale st = new NonTerminale(br.readLine());
-            g.getNonTerminals().add(st);
+            g.getNonTerminals().add(0,st);
             
             NonTerminale lhs;
         	List<Simbolo> rhs = new LinkedList<Simbolo>();

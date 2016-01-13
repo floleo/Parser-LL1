@@ -101,24 +101,27 @@ public class Main {
 	    	                    	}
 	    	                        break;
 	    	                    case 3:
-	    	                    	DOMImplementation domImpl = GenericDOMImplementation.getDOMImplementation();
-	    	                        String svgNS = "http://www.w3.org/TR/SVG11/";
-	    	                        Document document = domImpl.createDocument(svgNS, "svg", null);
-	    	                        SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
-	    	                        CreaTabella table = new CreaTabella();
-	    	                        table.paint(svgGenerator,gr);
-	    	                        boolean useCSS = true;
-	    	                        File f;
-	    	                        if(risp.equals("s")){
-	    	                        	f = new File("src\\GrammaticheEsterne\\"+uf+".svg");
-	    	                        } else f = new File("src\\Grammatiche\\"+uf+".svg");
-	    	                        OutputStream outputStream = new FileOutputStream(f);
-	    	                        Writer out = new OutputStreamWriter(outputStream, "UTF-8");
-	    	                        svgGenerator.stream(out, useCSS);  
-	    	                        outputStream.flush();
-	    	                        outputStream.close();
-	    	                    	new ApriSVG(uf,risp);
-	    	                    	break;
+	    	                    	ll = new ParserLL(gr);
+	    	                    	if(ll.isLL1(gr.getRules())){
+	    	                    		DOMImplementation domImpl = GenericDOMImplementation.getDOMImplementation();
+	    	                    		String svgNS = "http://www.w3.org/TR/SVG11/";
+	    	                    		Document document = domImpl.createDocument(svgNS, "svg", null);
+	    	                    		SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
+	    	                    		CreaTabella table = new CreaTabella();
+	    	                    		table.paint(svgGenerator,gr);
+	    	                    		boolean useCSS = true;
+	    	                    		File f;
+	    	                    		if(risp.equals("s")){
+	    	                    			f = new File("src\\GrammaticheEsterne\\"+uf+".svg");
+	    	                    		} else f = new File("src\\Grammatiche\\"+uf+".svg");
+	    	                    		OutputStream outputStream = new FileOutputStream(f);
+	    	                    		Writer out = new OutputStreamWriter(outputStream, "UTF-8");
+	    	                    		svgGenerator.stream(out, useCSS);  
+	    	                    		outputStream.flush();
+	    	                    		outputStream.close();
+	    	                    		new ApriSVG(uf,risp);
+	    	                    	}else System.out.println("La grammatica non è LL(1)");
+	    	                    		break;
 	    	                    case 0:
 	    	                        break;
 	    	                    default:
