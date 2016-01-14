@@ -197,6 +197,7 @@ public class Main {
 		                    	boolean b = true;
 		                    	ListIterator<NonTerminale> iter;
 		                    	do{
+		                    		if(k!=0) System.out.println("Produzioni inserite fino ad ora: \n" + regola);
 		                    		System.out.println("Inserisci il non terminale della parte sinistra (vedi lista):");
 		                    		System.out.println(nonTerminals);
 		                    		noterm = br.readLine();
