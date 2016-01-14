@@ -45,7 +45,7 @@ public class GestoreFile {
             os.close();
         }
         catch(Exception e){
-            System.out.println("Errore nella scrittura del file !!");
+            System.out.println("Errore nella scrittura del file!");
         }
 	}
 	
@@ -60,7 +60,7 @@ public class GestoreFile {
 			w.println(g.getRules());
         }
         catch(Exception e){
-            System.out.println("Errore nella scrittura del file !!");
+            System.out.println("Errore nella scrittura del file!");
         }
 	}
 	
@@ -78,7 +78,7 @@ public class GestoreFile {
              fp.close();
         }
         catch(Exception e){
-            System.out.println("Errore nella lettura del file!!");
+            System.out.println("Errore nella lettura del file!");
         }
         
         return g;
@@ -89,7 +89,7 @@ public class GestoreFile {
         LinkedList<String> ll = new LinkedList<>();
         File[] files = dir.listFiles();
         if (files == null) {
-            System.out.println("Directory errata");
+            System.out.println("Directory errata!");
         }else{
             for(int i=0;i<files.length;i++){
                 String st = files[i].getName();
@@ -102,7 +102,7 @@ public class GestoreFile {
     } 
 	
 	public void stampaFile(LinkedList<String> ll){
-        System.out.println("Lista delle grammatiche");
+        System.out.println("Lista delle grammatiche:");
         for (int i=0; i<ll.size();i++){
             System.out.println(i + " - " + ll.get(i));
         }

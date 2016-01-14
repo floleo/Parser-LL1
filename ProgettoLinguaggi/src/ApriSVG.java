@@ -19,7 +19,8 @@ public class ApriSVG {
 
 	@SuppressWarnings("deprecation")
 	public ApriSVG(String file, String risp) {
-        frame = new JFrame();
+        frame = new JFrame("Parsing Table");
+        frame.setLocation(200, 100);
         canvas = new JSVGCanvas();
 
         canvas.setDocumentState(JSVGCanvas.ALWAYS_DYNAMIC);

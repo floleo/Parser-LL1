@@ -1,14 +1,9 @@
 import java.io.Serializable;
 import java.util.*;
 
-/**
- * Collection of rules with a start symbol.
- */
+
 public class Grammatica implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private final NonTerminale start;
 	private final List<Produzione> regola;
@@ -16,8 +11,6 @@ public class Grammatica implements Serializable{
 	private final List<NonTerminale> nonTerminals;
 	private final List<Terminale> terminals;
 	private boolean isContextFree;
-	//private final Map<NonTerm, List<Rule>> ruleMap;
-	
 	
 	public Grammatica(NonTerminale start, List<Produzione> regola, List<NonTerminale> lhss, List<NonTerminale> nonTerminals, List<Terminale> terminals){
 		this.start = start;
@@ -36,8 +29,8 @@ public class Grammatica implements Serializable{
 		this.terminals = new LinkedList<>();
 		this.isContextFree = true;
 	}
+	
 
-	/** Returns the start symbol of this grammar. */
 	public NonTerminale getStart() {
 		return start;
 	}
@@ -58,7 +51,6 @@ public class Grammatica implements Serializable{
 	}
 
 
-	/** Returns the set of all terminals in the RHSs of this grammar. */
 	public List<Terminale> getTerminals() {
 		return terminals;
 	}
@@ -78,9 +70,4 @@ public class Grammatica implements Serializable{
 	}
 
 
-	@Override
-	public String toString() {
-		return "Rules: " + getRules() + "; Start symbol: "
-				+ getStart().getName();
-	}
 }

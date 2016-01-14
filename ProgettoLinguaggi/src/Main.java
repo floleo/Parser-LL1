@@ -31,10 +31,10 @@ public class Main {
 	        
 	        try{
 	            do{
-	                System.out.println("Menu': \n"
+	                System.out.println("Menù: \n"
 	                        + "1->Seleziona un file contenente la grammatica da analizzare \n"
-	                        + "2->Inserisci la grammatica da tastiera \n"
-	                        + "0-->Esci!");
+	                        + "2->Inserisci la grammatica da analizzare da tastiera \n"
+	                        + "0->Esci!");
 	                sc = Integer.parseInt(br.readLine());
 	                switch(sc){
 	                    case 1:
@@ -83,13 +83,13 @@ public class Main {
 	        	                System.out.println("1->Verifica se la grammatica selezionata è context-free \n"
 	        	                        + "2->Verifica se la grammatica selezionata è LL(1) \n"
 	        	                        + "3->Genera la tabella di parsing LL(1) \n"
-	        	                        + "0-->Indietro");
+	        	                        + "0->Indietro");
 	                    	sc1 = Integer.parseInt(br.readLine());
 	    	                switch(sc1){
 	    	                    case 1:
 	    	                    	if(gr.getIsContextFree())
-	    	                    		System.out.println("La grammatica è context-free!!!");
-	    	                    	else System.out.println("La grammatica non è context-free!!!");
+	    	                    		System.out.println("La grammatica è context-free!");
+	    	                    	else System.out.println("La grammatica non è context-free!");
 	    	                    	break;
 	    	                    case 2:
 	    	                    	ParserLL ll=new ParserLL(gr);
@@ -98,11 +98,11 @@ public class Main {
 	    	                    	ll.calcPredict();
     	                    		boolean x = ll.isLL1(gr.getRules());
 	    	                    	if(x){
-	    	                    		System.out.println("L'insieme dei first e': " + ll.getFirst());
-	    	                    		System.out.println("L'insieme dei follow e': " + ll.getFollow());
-	    	                    		System.out.println("L'insieme dei predict e': " + ll.getPredict());
+	    	                    		System.out.println("L'insieme dei first è: " + ll.getFirst());
+	    	                    		System.out.println("L'insieme dei follow è: " + ll.getFollow());
+	    	                    		System.out.println("L'insieme dei predict è: " + ll.getPredict());
 	    	                    		if(ll.LL1()) System.out.println("La grammatica è LL(1)");
-    	                    			else System.out.println("Duplice ingresso nella tabella dei predict! --> La grammatica non è LL(1)");
+    	                    			else System.out.println("Rilevati conflitti nella parse table! --> La grammatica non è LL(1)");
 	    	                    	}
 	    	                        break;
 	    	                    case 3:
@@ -128,7 +128,7 @@ public class Main {
 	    	                    		outputStream.flush();
 	    	                    		outputStream.close();
 	    	                    		new ApriSVG(uf,risp);
-	    	                    	}else System.out.println("Duplice ingresso nella tabella dei predict! --> La grammatica non è LL(1)");
+	    	                    	}else System.out.println("Rilevati conflitti nella parse table! --> La grammatica non è LL(1)");
 	    	                    		break;
 	    	                    case 0:
 	    	                        break;
@@ -138,7 +138,7 @@ public class Main {
 	    	            }while(sc1!=0);
 	                    	break;
 	                    case 2:
-	                    	System.out.println("INSERIMENTO GRAMMATICA DA TASTIERA");
+	                    	System.out.println("INSERIMENTO GRAMMATICA DA ANALIZZARE DA TASTIERA");
 	                    	
 	                    	LinkedList<Terminale> terminals = new LinkedList<>();
 	                    	Terminale t;
@@ -262,9 +262,9 @@ public class Main {
 	                    	ll1.calcPredict();
                     		boolean z = ll1.isLL1(g.getRules());
 	                    	if(z){
-	                    		System.out.println("L'insieme dei first e': "+ll1.getFirst());
-	                    		System.out.println("L'insieme dei follow e': "+ll1.getFollow());
-	                    		System.out.println("L'insieme dei predict e': "+ll1.getPredict());
+	                    		System.out.println("L'insieme dei first è: "+ll1.getFirst());
+	                    		System.out.println("L'insieme dei follow è: "+ll1.getFollow());
+	                    		System.out.println("L'insieme dei predict è: "+ll1.getPredict());
 	                    		if(ll1.LL1()) {
 	                    			System.out.println("La grammatica è LL(1)");
 	                    			DOMImplementation domImpl = GenericDOMImplementation.getDOMImplementation();
@@ -281,7 +281,7 @@ public class Main {
 	    	                        outputStream.flush();
 	    	                        outputStream.close();
 	    	                    	new ApriSVG(f,"n");
-	                    		}else System.out.println("Duplice ingresso nella tabella dei predict! --> La grammatica non è LL(1)");
+	                    		}else System.out.println("Rilevati conflitti nella parse table! --> La grammatica non è LL(1)");
 	                    	}
 	                        break;
 	                    case 0:
