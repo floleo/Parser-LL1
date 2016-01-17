@@ -119,7 +119,9 @@ public class GestoreFileEsterni {
             	NonTerminale nt = new NonTerminale(str);
                 g.getNonTerminals().add(nt);
             }
-            NonTerminale st = new NonTerminale(br.readLine());
+            
+            in = br.readLine();
+            NonTerminale st = new NonTerminale(String.valueOf(in.charAt(0)));
             g.getNonTerminals().add(0,st);
             
             NonTerminale lhs;

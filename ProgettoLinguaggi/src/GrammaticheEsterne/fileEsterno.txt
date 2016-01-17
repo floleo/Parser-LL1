@@ -1,6 +1,6 @@
 acca,id,c,d,e;
 A,B,C;
-S
+S;
 S->A,B;
 A->acca,id,C;
 B->id,d,e;

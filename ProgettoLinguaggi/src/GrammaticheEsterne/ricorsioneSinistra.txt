@@ -1,6 +1,6 @@
 a,b,c,d,e;
 A,B,C;
-S
+S;
 S->A,B;
 A->a,b,C;
 B->B,d,e;
