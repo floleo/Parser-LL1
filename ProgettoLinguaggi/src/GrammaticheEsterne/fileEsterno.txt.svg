@@ -39,10 +39,10 @@
       >C</text
       ><line y2="0" style="fill:none;" x1="0" x2="630" y1="0"
       /><line y2="190" style="fill:none;" x1="0" x2="630" y1="190"
-      /><text x="40" xml:space="preserve" y="55" style="stroke:none;"
-      >S-&gt;[A, B]</text
-      ><text x="40" xml:space="preserve" y="95" style="stroke:none;"
+      /><text x="40" xml:space="preserve" y="95" style="stroke:none;"
       >A-&gt;[acca, id, C]</text
+      ><text x="40" xml:space="preserve" y="55" style="stroke:none;"
+      >S-&gt;[A, B]</text
       ><text x="140" xml:space="preserve" y="135" style="stroke:none;"
       >B-&gt;[id, d, e]</text
       ><text x="240" xml:space="preserve" y="175" style="stroke:none;"
