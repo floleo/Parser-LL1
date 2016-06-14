@@ -35,7 +35,7 @@ public class ParserLL {
                 Set<Terminale> rhs = new HashSet<>(first.get(beta.get(0)));
                 int i = 0;
                 while (i < beta.size() - 1 && first.get(beta.get(i)).contains(Simbolo.EPSILON)) {
-                    rhs.addAll(first.get(beta.get(i + 1)));
+                    rhs.addAll(first.get(beta.get(i + 1))); //unione
                     i++;
                 }
                 if (i == beta.size() - 1 && first.get(beta.get(i)).contains(Simbolo.EPSILON)) {

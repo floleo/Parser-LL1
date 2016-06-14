@@ -50,7 +50,7 @@ public class Main {
 	                    		if(!risp.equals("s") && !risp.equals("n")) System.out.println("Devi inserire i caratteri s/n!");
 	                    	}while(!risp.equals("s") && !risp.equals("n"));
 	                    	do{
-	                    		System.out.println("Seleziona il file da cui leggere la grammatica (digitare l'indice): ");
+	                    		System.out.println("Seleziona il file da cui leggere la grammatica (digitare l'indice)");
 	                    		if(risp.equals("s")){
 	                    			list = gfe.visualizzaFileEsterno();
 	                    			gfe.stampaFile(list);
