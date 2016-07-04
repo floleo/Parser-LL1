@@ -1,5 +1,5 @@
 Il programma è stato scritto con il linguaggio di programmazione OO Java sulla piattaforma Eclipse Luna 4.4.
-Per poter aprire il progetto ed eseguire correttamente il progetto bisogna seguire queste istruzioni:
+Per poter aprire ed eseguire correttamente il progetto bisogna seguire le seguenti istruzioni:
 - Aprire Eclipse;
 - Selezionare in alto a sinistra File -> Import;
 - Una volta aperta la finestra di import selezionare dal tab General "Existing Projects into Workspace" e cliccare su 

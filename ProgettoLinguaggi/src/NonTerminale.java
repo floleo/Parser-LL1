@@ -6,12 +6,14 @@ public class NonTerminale implements Simbolo, Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private final String name;
+	//definizione dell'espressione regolare per i non terminali che possono comprendere un solo carattere MAIUSCOLO
 	private static String exp_name="[A-Z]";
 	
 	public NonTerminale(String name) {
 		this.name = name;
 	}
 
+	//funzione che fa un controllo sui non terminali in modo da scartare quelli non previsti dall'espressione regolare
 	public boolean checkNonTerminale ()
     {         
         Pattern pattern = Pattern.compile(exp_name);

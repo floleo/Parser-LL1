@@ -5,11 +5,13 @@ import java.util.*;
 public class Grammatica implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	//assioma
 	private final NonTerminale start;
 	private final List<Produzione> regola;
 	private final List<NonTerminale> lhss;
 	private final List<NonTerminale> nonTerminals;
 	private final List<Terminale> terminals;
+	//per verificare che la grammatica sia context-free
 	private boolean isContextFree;
 	
 	public Grammatica(NonTerminale start, List<Produzione> regola, List<NonTerminale> lhss, List<NonTerminale> nonTerminals, List<Terminale> terminals){

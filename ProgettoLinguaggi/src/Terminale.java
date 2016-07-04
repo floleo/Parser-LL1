@@ -6,11 +6,14 @@ public class Terminale implements Simbolo, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private final String name;
+	//definizione dell'espressione regolare per i terminali che possono comprendere da uno a più caratteri purché siano minuscoli
 	private static String exp_name = "[^A-Z]+";
+	
 	public Terminale(String name) {
 		this.name = name;
 	}
 	
+	//funzione che fa un controllo sui terminali in modo da scartare quelli non previsti dall'espressione regolare
 	public boolean checkTerminale ()
     {         
         Pattern pattern = Pattern.compile(exp_name);

@@ -10,10 +10,12 @@ public class ParserLL {
         this.grammatica = grammatica;
     }
 
+    //funzione per il calcolo dei first
     public void calcFirst() {
         first = new HashMap<>();
 
         Set<Terminale> epsilonSet = new HashSet<>();
+        //nell'insieme dei first può essere contenuta la epsilon
         epsilonSet.add(Simbolo.EPSILON);
         first.put(Simbolo.EPSILON, epsilonSet);
 
@@ -32,16 +34,20 @@ public class ParserLL {
 
             for (Produzione r : grammatica.getRules()) {
             	List<Simbolo> beta = r.getRHS();
+            	//per l'insieme dei terminali prendo il primo elemento che si trova nella parte destra di ogni produzione
                 Set<Terminale> rhs = new HashSet<>(first.get(beta.get(0)));
                 int i = 0;
+                //caso in cui un non terminale può diventare epsilon
                 while (i < beta.size() - 1 && first.get(beta.get(i)).contains(Simbolo.EPSILON)) {
                     rhs.addAll(first.get(beta.get(i + 1))); //unione
                     i++;
                 }
+                //caso in cui abbiamo epsilon da inserire come first
                 if (i == beta.size() - 1 && first.get(beta.get(i)).contains(Simbolo.EPSILON)) {
                     rhs.add(Simbolo.EPSILON);
                 }
                 int oldLength = first.get(r.getLHS()).size();
+                //per il non terminale nella parte sinistra creo l'insieme dei first 
                 first.get(r.getLHS()).addAll(rhs);
                 diff = diff || oldLength < first.get(r.getLHS()).size();
             }
@@ -123,7 +129,8 @@ public class ParserLL {
         return predict;
     }
 
- 
+    //verifica preliminare per rilevare la presenza di prefissi comuni o ricorsione sinistra (in tal caso la grammatica non 
+    //può essere di tipo LL1)
     public boolean isLL1(List<Produzione> produzioni) {
     	ListIterator<Produzione> it = produzioni.listIterator();
     	ListIterator<Produzione> it2 = produzioni.listIterator();
@@ -151,6 +158,8 @@ public class ParserLL {
     	return true;
     }
     
+    //nel caso in cui non abbiamo ricorsione sinistra o prefissi comuni verifichiamo che l'intersezioni dell'insieme dei predict
+    //sia vuota
     public boolean LL1(){
     	for (Produzione r : grammatica.getRules()) {
     		for (Produzione r2 : grammatica.getRules()) {
